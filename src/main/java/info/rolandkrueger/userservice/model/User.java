@@ -210,6 +210,7 @@ public class User implements UserDetails {
         return MoreObjects.toStringHelper(this)
                 .add("username", username)
                 .add("fullname", fullName)
+                .add("token", registrationConfirmationToken)
                 .add("roles", authorities)
                 .toString();
     }

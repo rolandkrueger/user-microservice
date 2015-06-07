@@ -13,6 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Roland Krüger
@@ -65,6 +66,8 @@ public class DevelopmentProfileConfiguration implements ApplicationListener<Cont
         User charly = new User("charly");
         charly.setUnencryptedPassword("charly");
 
-        userRepository.save(Arrays.asList(alice, bob, charly));
+        final List<User> users = Arrays.asList(alice, bob, charly);
+        userRepository.save(users);
+        LOG.info("Added users {}", users);
     }
 }

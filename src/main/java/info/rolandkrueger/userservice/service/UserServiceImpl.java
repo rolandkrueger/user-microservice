@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService{
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public User findByRegistrationConfirmationToken(String confirmationToken) {
+        return userRepository.findByRegistrationConfirmationToken(confirmationToken);
+    }
 }

@@ -9,4 +9,5 @@ public interface UserService {
 
     User findUserByUsername(String username);
 
+    User findByRegistrationConfirmationToken(String confirmationToken);
 }
