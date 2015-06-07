@@ -230,4 +230,8 @@ public class User implements UserDetails {
     public int hashCode() {
         return username.hashCode();
     }
+
+    public void clearPassword() {
+        password = null;
+    }
 }

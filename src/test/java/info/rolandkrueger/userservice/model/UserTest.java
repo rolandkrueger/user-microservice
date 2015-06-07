@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -78,6 +79,13 @@ public class UserTest {
         assertThat(user.getRegistrationConfirmationToken(), is(notNullValue()));
         user.clearRegistrationConfirmationToken();
         assertThat(user.getRegistrationConfirmationToken(), is(nullValue()));
+    }
+
+    @Test
+    public void testClearPassword() {
+        user.setUnencryptedPassword("password");
+        user.clearPassword();
+        assertThat(user.getPassword(), is(nullValue()));
     }
 
     @Test
