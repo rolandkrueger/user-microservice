@@ -31,18 +31,17 @@ public class AuthorityRepositoryTest {
 
     @Before
     public void setUp() {
-        authority = new Authority("user");
+        authority = new Authority("editor");
     }
 
     @Test(expected = DataIntegrityViolationException.class)
     public void test_authority_unique_in_db() {
         authorityRepository.save(authority);
-        authorityRepository.save(new Authority("user"));
+        authorityRepository.save(new Authority("editor"));
     }
 
     @Test
     public void testFindByAuthority() {
-        authorityRepository.save(authority);
         Authority foundAuthority = authorityRepository.findByAuthority("user");
         assertThat(foundAuthority, is(notNullValue()));
 

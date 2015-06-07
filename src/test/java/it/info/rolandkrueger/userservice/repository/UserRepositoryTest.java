@@ -84,7 +84,7 @@ public class UserRepositoryTest {
 
     @Test
     public void test_load_nonexisting_user() {
-        final User user = userRepository.findByUsername("user");
+        final User user = userRepository.findByUsername("invalid");
         assertThat(user, is(nullValue()));
     }
 
