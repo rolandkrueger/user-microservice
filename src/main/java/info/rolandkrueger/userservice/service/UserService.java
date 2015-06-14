@@ -14,5 +14,5 @@ public interface UserService {
 
     User findByRegistrationConfirmationToken(String confirmationToken);
 
-    List<User> getUserList(int page, int size,  Sort.Direction sort);
+    List<User> getUserList(int page, int size, Sort.Direction sort);
 }

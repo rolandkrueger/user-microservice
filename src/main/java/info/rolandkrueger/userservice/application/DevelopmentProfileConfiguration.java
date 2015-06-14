@@ -31,9 +31,9 @@ public class DevelopmentProfileConfiguration implements ApplicationListener<Cont
     static {
         LOG.info("Creating test data: authorities 'admin', 'user', 'developer'");
 
-        admins = new Authority("admin");
-        users = new Authority("user");
-        developers = new Authority("developer");
+        admins = new Authority("admin", "The admin role");
+        users = new Authority("user", "The user role");
+        developers = new Authority("developer", "The developer role");
 
         LOG.info("Creating test data: users 'alice', 'bob', 'charly'");
         alice = new User("alice");

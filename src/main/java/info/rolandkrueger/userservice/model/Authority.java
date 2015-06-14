@@ -23,10 +23,17 @@ public class Authority implements GrantedAuthority {
     @NotBlank
     private String authority;
 
+    private String description;
+
     private Authority() {}
 
     public Authority(String authority) {
         setAuthority(authority);
+    }
+
+    public Authority(String authority, String description) {
+        this(authority);
+        this.description = description;
     }
 
     @Id
@@ -49,6 +56,15 @@ public class Authority implements GrantedAuthority {
     @JsonView(UserWithoutPasswordView.class)
     public String getAuthority() {
         return authority;
+    }
+
+    @JsonView(UserWithoutPasswordView.class)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

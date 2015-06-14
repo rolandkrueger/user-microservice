@@ -10,5 +10,5 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value = {AuthorityTest.class, UserTest.class})
-public class TestSuite {
+public class UnitTestSuite {
 }
