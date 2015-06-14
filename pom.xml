@@ -98,6 +98,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -112,8 +117,35 @@
                 <version>2.18.1</version>
                 <configuration>
                     <argLine>-Dspring.profiles.active=DEV</argLine>
+                    <excludes>
+                        <exclude>it/**</exclude>
+                    </excludes>
                 </configuration>
-            </plugin></plugins>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <id>integration-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <phase>integration-test</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>info/**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>it/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

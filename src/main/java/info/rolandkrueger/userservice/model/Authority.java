@@ -1,16 +1,18 @@
 package info.rolandkrueger.userservice.model;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.security.core.GrantedAuthority;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author Roland Krüger
@@ -44,6 +46,7 @@ public class Authority implements GrantedAuthority {
 
     @Override
     @Column(unique = true)
+    @JsonView(UserWithoutPasswordView.class)
     public String getAuthority() {
         return authority;
     }

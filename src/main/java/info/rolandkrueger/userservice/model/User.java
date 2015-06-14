@@ -1,5 +1,25 @@
 package info.rolandkrueger.userservice.model;
 
+import java.time.LocalDate;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -7,12 +27,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
 /**
  * @author Roland Krüger
@@ -58,6 +72,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonView(UserWithoutPasswordView.class)
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -67,6 +82,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonView(UserWithoutPasswordView.class)
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
@@ -76,6 +92,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonView(UserWithoutPasswordView.class)
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -85,6 +102,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonView(UserWithoutPasswordView.class)
     public boolean isEnabled() {
         return enabled;
     }
@@ -94,6 +112,7 @@ public class User implements UserDetails {
     }
 
     @Column(unique = true)
+    @JsonView(UserWithoutPasswordView.class)
     public String getUsername() {
         return username;
     }
@@ -105,6 +124,7 @@ public class User implements UserDetails {
 
     @Override
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonView(UserWithoutPasswordView.class)
     public Collection<Authority> getAuthorities() {
         if (authorities == null) {
             return Collections.emptyList();
@@ -129,6 +149,7 @@ public class User implements UserDetails {
         setPassword(new BCryptPasswordEncoder().encode(password));
     }
 
+    @JsonView(UserWithoutPasswordView.class)
     public String getFullName() {
         return fullName;
     }
@@ -144,6 +165,7 @@ public class User implements UserDetails {
         authorities.add(authority);
     }
 
+    @JsonView(UserWithoutPasswordView.class)
     public String getRememberMeToken() {
         return rememberMeToken;
     }
@@ -153,6 +175,7 @@ public class User implements UserDetails {
     }
 
     @Column(unique = true, name = "CONFIRMATION_TOKEN")
+    @JsonView(UserWithoutPasswordView.class)
     public String getRegistrationConfirmationToken() {
         return registrationConfirmationToken;
     }
@@ -161,6 +184,7 @@ public class User implements UserDetails {
         this.registrationConfirmationToken = registrationConfirmationToken;
     }
 
+    @JsonView(UserWithoutPasswordView.class)
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
@@ -169,6 +193,7 @@ public class User implements UserDetails {
         this.registrationDate = registrationDate;
     }
 
+    @JsonView(UserWithoutPasswordView.class)
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
@@ -177,6 +202,7 @@ public class User implements UserDetails {
         this.lastLogin = lastLogin;
     }
 
+    @JsonView(UserWithoutPasswordView.class)
     public String getEmail() {
         return email;
     }
