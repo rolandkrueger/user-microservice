@@ -20,8 +20,8 @@ public abstract class AbstractRestControllerTest {
         restTemplate = new TestRestTemplate();
     }
 
-    protected String contextPath() {
-        return CONTEXT_PATH + port;
+    protected String toPath(String uri) {
+        return CONTEXT_PATH + port + uri;
     }
 
 }

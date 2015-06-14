@@ -55,7 +55,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         User roland = new User("roland");
         when(userServiceMock.findUserByUsername("roland")).thenReturn(roland);
 
-        final ResponseEntity<User> userResponseEntity = restTemplate.getForEntity(contextPath() + "/user/roland", User.class);
+        final ResponseEntity<User> userResponseEntity = restTemplate.getForEntity(toPath("/user/roland"), User.class);
 
         assertThat(userResponseEntity.getStatusCode(), is(HttpStatus.OK));
         User user = userResponseEntity.getBody();
@@ -65,7 +65,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
 
     @Test
     public void testFindUserByUsername_NotFound() throws Exception {
-        final ResponseEntity<User> response = restTemplate.getForEntity(contextPath() + "/user/tyrion", User.class);
+        final ResponseEntity<User> response = restTemplate.getForEntity(toPath("/user/tyrion"), User.class);
         assertEntityNotFound(response);
     }
 
@@ -73,7 +73,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
     public void testFindUserByRegistrationToken() {
         when(userServiceMock.findByRegistrationConfirmationToken("valid_confirmation_token")).thenReturn(alice);
 
-        final ResponseEntity<User> response = restTemplate.getForEntity(contextPath() + "/user?token=valid_confirmation_token", User.class);
+        final ResponseEntity<User> response = restTemplate.getForEntity(toPath("/user?token=valid_confirmation_token"), User.class);
         assertEntityFound(response);
         assertUsersAreEqual(response.getBody(), alice);
     }
@@ -81,6 +81,6 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
     @Test
     public void testFindUserByRegistrationToken_NotFound() {
         when(userServiceMock.findByRegistrationConfirmationToken("unknown_token")).thenReturn(null);
-        assertEntityNotFound(restTemplate.getForEntity(contextPath() + "/user?token=invalid_token", User.class));
+        assertEntityNotFound(restTemplate.getForEntity(toPath("/user?token=invalid_token"), User.class));
     }
 }
