@@ -2,7 +2,6 @@ package it.info.rolandkrueger.userservice.testsupport;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Roland Krüger
@@ -14,7 +13,7 @@ public abstract class AbstractRestControllerTest {
     @Value("${local.server.port}")
     protected int port;
 
-    protected RestTemplate restTemplate;
+    protected TestRestTemplate restTemplate;
 
     public AbstractRestControllerTest() {
         restTemplate = new TestRestTemplate();

@@ -1,5 +1,6 @@
 package it.info.rolandkrueger.userservice.testsupport;
 
+import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,11 @@ public class Asserts {
         assertThat(actual.getEmail(), is(expected.getEmail()));
         assertThat(actual.getAuthorities(), containsInAnyOrder(expected.getAuthorities().toArray()));
         assertThat(actual.getRegistrationConfirmationToken(), is(expected.getRegistrationConfirmationToken()));
+    }
+
+    public static void assertAuthoritiesAreEqual(Authority actual, Authority expected) {
+        assertThat(actual, is(expected));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getDescription(), is(expected.getDescription()));
     }
 }
