@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
  */
 public interface AuthorityService {
 
-    Authority findByAuthority(String name);
+    Authority findByAuthority(String authority);
 
     List<Authority> getAuthorityList(int page, int size, Sort.Direction sort);
 
@@ -18,5 +18,5 @@ public interface AuthorityService {
 
     Authority update(Authority authority);
 
-    void delete(Authority authority);
+    void delete(Long authorityId);
 }

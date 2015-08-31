@@ -3,7 +3,6 @@ package it.info.rolandkrueger.userservice.controller;
 import java.time.LocalDate;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
-import info.rolandkrueger.userservice.controller.UserRestController;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.service.UserService;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
@@ -12,15 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.*;
 import static it.info.rolandkrueger.userservice.testsupport.Asserts.*;
@@ -32,22 +27,16 @@ import static org.mockito.Mockito.*;
  * @author Roland Krüger
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
-@SpringApplicationConfiguration(classes = { TestContext.class, UserMicroserviceApplication.class })
-@WebIntegrationTest
-@IntegrationTest("server.port:0")
+@SpringApplicationConfiguration(classes = { UserMicroserviceApplication.class })
+@WebIntegrationTest(randomPort = true)
 public class UserRestControllerTest extends AbstractRestControllerTest {
 
     @Mock
     private UserService userServiceMock;
 
-    @Autowired
-    private UserRestController userRestController;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        userRestController.setUserService(userServiceMock);
     }
 
     @Test

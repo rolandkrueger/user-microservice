@@ -41,9 +41,10 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public void delete(Authority authority) {
-        authorityRepository.delete(authority);
+    public void delete(Long authorityId) {
+        authorityRepository.delete(authorityId);
     }
+
     @Autowired
     public void setAuthorityRepository(AuthorityRepository authorityRepository) {
         this.authorityRepository = authorityRepository;

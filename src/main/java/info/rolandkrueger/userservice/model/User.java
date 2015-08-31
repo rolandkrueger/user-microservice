@@ -1,5 +1,6 @@
 package info.rolandkrueger.userservice.model;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -34,6 +37,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Entity
 public class User implements UserDetails {
     private Long id;
+    @Version
+    Long version = 1L;
+    @LastModifiedDate
+    LocalDateTime lastModified = LocalDateTime.now();
+
     @NotBlank
     private String username;
     @NotBlank
@@ -54,6 +62,8 @@ public class User implements UserDetails {
 
     public User() {
         registrationDate = LocalDate.now();
+        lastModified = LocalDateTime.now();
+        version = 1L;
     }
 
     public User(String username) {
@@ -209,6 +219,22 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public boolean hasAuthority(String authority) {

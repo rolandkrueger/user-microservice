@@ -95,7 +95,7 @@ public class AuthorityServiceTest {
 
     @Test(expected = DataIntegrityViolationException.class)
     public void testDelete_WithForeignKeyConstraintViolation() throws Exception {
-        authorityService.delete(admins);
+        authorityService.delete(admins.getId());
         assertThat(authorityService.findByAuthority(admins.getAuthority()), is(nullValue()));
     }
 
@@ -103,7 +103,7 @@ public class AuthorityServiceTest {
     public void testDelete() {
         Authority authority = new Authority("test");
         final Authority created = authorityService.create(authority);
-        authorityService.delete(created);
+        authorityService.delete(created.getId());
         assertThat(authorityService.findByAuthority("test"), is(nullValue()));
     }
 }
