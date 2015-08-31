@@ -2,7 +2,6 @@ package info.rolandkrueger.userservice.model;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -46,9 +44,10 @@ public class User implements UserDetails {
     private String username;
     @NotBlank
     private String password;
-    private String fullName;
     @Email
     private String email;
+    private String fullName;
+
     private boolean enabled = true;
     private boolean accountNonLocked = true;
     private boolean accountNonExpired = true;
@@ -82,7 +81,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonView(UserWithoutPasswordView.class)
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -92,7 +90,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonView(UserWithoutPasswordView.class)
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
@@ -102,7 +99,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonView(UserWithoutPasswordView.class)
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -112,7 +108,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonView(UserWithoutPasswordView.class)
     public boolean isEnabled() {
         return enabled;
     }
@@ -122,19 +117,17 @@ public class User implements UserDetails {
     }
 
     @Column(unique = true)
-    @JsonView(UserWithoutPasswordView.class)
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(MoreObjects.firstNonNull(username, "").trim()));
+        Preconditions.checkArgument(! Strings.isNullOrEmpty(MoreObjects.firstNonNull(username, "").trim()));
         this.username = username.trim();
     }
 
     @Override
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonView(UserWithoutPasswordView.class)
     public Collection<Authority> getAuthorities() {
         if (authorities == null) {
             return Collections.emptyList();
@@ -156,10 +149,9 @@ public class User implements UserDetails {
 
     @Transient
     public void setUnencryptedPassword(String password) {
-        setPassword(new BCryptPasswordEncoder().encode(password));
+        setPassword(new BCryptPasswordEncoder(12, new SecureRandom()).encode(password));
     }
 
-    @JsonView(UserWithoutPasswordView.class)
     public String getFullName() {
         return fullName;
     }
@@ -175,7 +167,6 @@ public class User implements UserDetails {
         authorities.add(authority);
     }
 
-    @JsonView(UserWithoutPasswordView.class)
     public String getRememberMeToken() {
         return rememberMeToken;
     }
@@ -185,7 +176,6 @@ public class User implements UserDetails {
     }
 
     @Column(unique = true, name = "CONFIRMATION_TOKEN")
-    @JsonView(UserWithoutPasswordView.class)
     public String getRegistrationConfirmationToken() {
         return registrationConfirmationToken;
     }
@@ -194,7 +184,6 @@ public class User implements UserDetails {
         this.registrationConfirmationToken = registrationConfirmationToken;
     }
 
-    @JsonView(UserWithoutPasswordView.class)
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
@@ -203,7 +192,6 @@ public class User implements UserDetails {
         this.registrationDate = registrationDate;
     }
 
-    @JsonView(UserWithoutPasswordView.class)
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
@@ -212,7 +200,6 @@ public class User implements UserDetails {
         this.lastLogin = lastLogin;
     }
 
-    @JsonView(UserWithoutPasswordView.class)
     public String getEmail() {
         return email;
     }
@@ -244,7 +231,7 @@ public class User implements UserDetails {
 
     public boolean hasAuthority(Authority authority) {
         Preconditions.checkArgument(authority != null);
-        return !getAuthorities().isEmpty() && getAuthorities().contains(authority);
+        return ! getAuthorities().isEmpty() && getAuthorities().contains(authority);
     }
 
     public String createRegistrationConfirmationToken() {
@@ -269,7 +256,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof User)) {
+        if (obj == null || ! (obj instanceof User)) {
             return false;
         }
         if (obj == this) {
