@@ -11,7 +11,7 @@ public abstract class AbstractRestControllerTest {
     public final static String CONTEXT_PATH = "http://localhost:";
 
     @Value("${local.server.port}")
-    protected int port;
+    protected int port = 8080;
 
     protected TestRestTemplate restTemplate;
 
