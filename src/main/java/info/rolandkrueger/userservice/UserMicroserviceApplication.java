@@ -15,9 +15,9 @@ public class UserMicroserviceApplication extends WebSecurityConfigurerAdapter {
 
     public static void main(String[] args) {
         SpringApplication.run(
-                new Object[]{
+                new Object[] {
                         UserMicroserviceApplication.class,
-                        DevelopmentProfileConfiguration.class}
+                        DevelopmentProfileConfiguration.class }
                 , args);
     }
 
