@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>User Microservice</name>
-    <description>Microservice for</description>
+    <description>Microservice for user accounts</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -143,6 +143,29 @@
                     <includes>
                         <include>it/**</include>
                     </includes>
+                </configuration>
+            </plugin>
+
+            <!--Generation of project documentation-->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <backend>html</backend>
+                    <doctype>book</doctype>
+                    <attributes>
+                        <toc/>
+                    </attributes>
                 </configuration>
             </plugin>
         </plugins>
