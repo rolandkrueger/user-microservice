@@ -18,4 +18,10 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     @RestResource(exported = false)
     @Override Iterable<User> findAll();
+
+    @RestResource(exported = false)
+    @Override <S extends User> S save(S entity);
+
+    @RestResource(exported = false)
+    @Override <S extends User> Iterable<S> save(Iterable<S> entities);
 }
