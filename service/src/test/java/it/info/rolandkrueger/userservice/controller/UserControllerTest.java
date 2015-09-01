@@ -1,6 +1,8 @@
 package it.info.rolandkrueger.userservice.controller;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
+import info.rolandkrueger.userservice.api.UserService;
+import info.rolandkrueger.userservice.api.UserServiceAPI;
 import info.rolandkrueger.userservice.model.User;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Test;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 
 import static java.util.Collections.singletonMap;
@@ -26,5 +29,10 @@ public class UserControllerTest extends AbstractRestControllerTest {
     public void testUpdateUserData() {
         ResponseEntity<String> userEntity =restTemplate.getForEntity(toPath("users/search/findByUsername?username=bob"), String.class);
         String body = userEntity.getBody();
+    }
+
+    @Test
+    public void test() {
+        UserService userService = UserServiceAPI.init("http://localhost:8080");
     }
 }

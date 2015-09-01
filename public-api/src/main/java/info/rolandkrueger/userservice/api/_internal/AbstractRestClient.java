@@ -1,4 +1,4 @@
-package info.rolandkrueger.userservice.api.internal;
+package info.rolandkrueger.userservice.api._internal;
 
 import org.springframework.web.client.RestTemplate;
 

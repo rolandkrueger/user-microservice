@@ -1,35 +1,29 @@
 package info.rolandkrueger.userservice.controller;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
+import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.repository.UserRepository;
 import info.rolandkrueger.userservice.service.exception.UserNotFoundException;
 import info.rolandkrueger.userservice.service.exception.UsernameAlreadyInUseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.util.Collections.emptyList;
-import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.OK;
 
 /**
  * @author Roland Krüger
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/" + RestApiConstants.USERS_RESOURCE)
 public class UserController {
 
     @Autowired

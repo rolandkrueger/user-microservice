@@ -105,7 +105,6 @@
             <groupId>info.rolandkrueger.user.api</groupId>
             <artifactId>user-microservice-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>
