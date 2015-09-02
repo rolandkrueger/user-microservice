@@ -94,7 +94,9 @@ public class Authority implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return authority;
+        return MoreObjects.toStringHelper(Authority.class)
+                .add("authority", authority)
+                .toString();
     }
 
     @Override

@@ -84,9 +84,14 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
                 self.getHref(),
                 HttpMethod.GET,
                 entityForHALData,
-                new ParameterizedTypeReference<PagedResources<T>>() {
-                });
+                getParameterizedTypeReference());
     }
+
+    /**
+     * Delegate creation of a properly typed {@link ParameterizedTypeReference} instance to the subclass so that the
+     * generic entity type T can be inferred by the RestTemplate.
+     */
+    protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReference();
 
     protected Link expandLink(final Link link, final Integer page, final Integer size, final String sortBy, final
     SortDirection direction) {
@@ -107,6 +112,5 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
             }
         }});
     }
-
 
 }

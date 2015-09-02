@@ -1,17 +1,19 @@
 package info.rolandkrueger.userservice.api.model;
 
+import com.google.common.base.MoreObjects;
+
 import java.time.LocalDateTime;
 
 /**
  * @author Roland Krüger
  */
-public class AuthorityDTO {
+public class AuthorityApiData {
     private Long version;
     private LocalDateTime lastModified;
     private String authority;
     private String description;
 
-    public AuthorityDTO() {
+    public AuthorityApiData() {
     }
 
     public Long getVersion() {
@@ -44,5 +46,12 @@ public class AuthorityDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(AuthorityApiData.class)
+                .add("authority", authority)
+                .toString();
     }
 }
