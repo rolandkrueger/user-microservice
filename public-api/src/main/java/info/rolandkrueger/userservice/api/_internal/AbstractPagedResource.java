@@ -42,18 +42,20 @@ public abstract class AbstractPagedResource<T, R extends AbstractPagedResource> 
         this.templatedBaseLink = templatedBaseLink;
     }
 
-    protected final Link goToPageSorted(Integer page, Integer size, String sortBy, SortDirection direction) {
-        return expandLink(templatedBaseLink, page, size, sortBy, direction);
+    public final R goToPageSorted(Integer page, Integer size, String sortBy, SortDirection direction) {
+        R resource = createResourceInstance(expandLink(templatedBaseLink, page, size, sortBy, direction));
+        resource.setTemplatedBaseLink(templatedBaseLink);
+        return resource;
     }
 
     public final R sort(String sortBy, SortDirection direction) {
-        R resource = createResourceInstance(goToPageSorted(null, null, sortBy, direction));
+        R resource = createResourceInstance(expandLink(templatedBaseLink, null, null, sortBy, direction));
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
     }
 
     public R goToPage(Integer page, Integer size) {
-        R resource = createResourceInstance(goToPageSorted(page, size, null, null));
+        R resource = createResourceInstance(expandLink(templatedBaseLink, page, size, null, null));
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
     }

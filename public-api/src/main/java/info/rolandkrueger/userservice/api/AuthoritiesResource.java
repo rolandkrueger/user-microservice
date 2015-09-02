@@ -30,6 +30,11 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         return sort(getSortByProperty(sortBy), direction);
     }
 
+    public AuthoritiesResource goToPageSorted(Integer page, Integer size, AuthoritiesSort sortBy, SortDirection
+            direction) {
+        return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
+    }
+
     private String getSortByProperty(AuthoritiesSort sortBy) {
         return sortBy == null ? null : sortBy.getProperty();
     }
