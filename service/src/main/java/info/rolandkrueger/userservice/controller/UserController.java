@@ -23,7 +23,7 @@ import static org.springframework.http.HttpStatus.OK;
  * @author Roland Krüger
  */
 @RestController
-@RequestMapping("/" + RestApiConstants.USERS_RESOURCE)
+@RequestMapping("/" + RestApiConstants.USERS_RESOURCE + "/update")
 public class UserController {
 
     @Autowired
