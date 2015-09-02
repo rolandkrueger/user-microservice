@@ -81,7 +81,7 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
         }
 
         responseEntity = restTemplate.exchange(
-                self.getHref(),
+                self.expand().getHref(),
                 HttpMethod.GET,
                 entityForHALData,
                 getParameterizedTypeReference());
