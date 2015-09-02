@@ -9,12 +9,10 @@ import org.springframework.hateoas.PagedResources;
 /**
  * @author Roland Krüger
  */
-public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData> {
+public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData, AuthoritiesResource> {
 
-    private Link searchLink;
-
-    AuthoritiesResource(Link self, boolean isAtPage) {
-        super(self, isAtPage);
+    AuthoritiesResource(Link templatedBaseLink) {
+        super(templatedBaseLink, templatedBaseLink);
     }
 
     @Override
@@ -23,20 +21,16 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData>
         };
     }
 
-    public AuthoritiesResource goToPage(Integer page, Integer size) {
-        return new AuthoritiesResource(getLinkForPage(page, size), true);
+    @Override
+    protected AuthoritiesResource createResourceInstance(Link self) {
+        return new AuthoritiesResource(self);
     }
 
-    public AuthoritiesResource next() {
-        return new AuthoritiesResource(nextPageLink(), super.isAtPage);
-    }
-
-    public AuthoritiesResource previous() {
-        return new AuthoritiesResource(previousPageLink(), super.isAtPage);
+    public AuthoritiesResource sort(AuthoritiesSort sortBy, SortDirection direction) {
+        return sort(getSortByProperty(sortBy), direction);
     }
 
     private String getSortByProperty(AuthoritiesSort sortBy) {
         return sortBy == null ? null : sortBy.getProperty();
     }
-
 }

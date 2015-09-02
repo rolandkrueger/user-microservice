@@ -16,31 +16,46 @@ import java.util.HashMap;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractPagedResource<T> extends AbstractRestClient {
+public abstract class AbstractPagedResource<T, R extends AbstractPagedResource> extends AbstractRestClient {
 
+    private Link templatedBaseLink;
     protected Link self;
-    protected boolean isAtPage;
     private ResponseEntity<PagedResources<T>> responseEntity;
 
-    protected AbstractPagedResource(Link self, boolean isAtPage) {
+    protected AbstractPagedResource(Link templatedBaseLink, Link self) {
         Preconditions.checkNotNull(self);
-        this.isAtPage = isAtPage;
+        Preconditions.checkNotNull(templatedBaseLink);
+
+        this.templatedBaseLink = templatedBaseLink;
         this.self = self;
     }
 
+    /**
+     * Delegate creation of a properly typed {@link ParameterizedTypeReference} instance to the subclass so that the
+     * generic entity type T can be inferred by the RestTemplate.
+     */
+    protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReference();
+
+    protected abstract R createResourceInstance(Link self);
+
+    protected void setTemplatedBaseLink(Link templatedBaseLink) {
+        this.templatedBaseLink = templatedBaseLink;
+    }
+
     protected final Link goToPageSorted(Integer page, Integer size, String sortBy, SortDirection direction) {
-        if (page != null && isAtPage) {
-            throw new IllegalStateException("cannot go to page: page parameter is already set");
-        }
-        return expandLink(self, page, size, sortBy, direction);
+        return expandLink(templatedBaseLink, page, size, sortBy, direction);
     }
 
-    protected final Link sort(String sortBy, SortDirection direction) {
-        return goToPageSorted(null, null, sortBy, direction);
+    public final R sort(String sortBy, SortDirection direction) {
+        R resource = createResourceInstance(goToPageSorted(null, null, sortBy, direction));
+        resource.setTemplatedBaseLink(templatedBaseLink);
+        return resource;
     }
 
-    protected final Link getLinkForPage(Integer page, Integer size) {
-        return goToPageSorted(page, size, null, null);
+    public R goToPage(Integer page, Integer size) {
+        R resource = createResourceInstance(goToPageSorted(page, size, null, null));
+        resource.setTemplatedBaseLink(templatedBaseLink);
+        return resource;
     }
 
     public final boolean hasNext() {
@@ -48,7 +63,13 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
         return responseEntity.getBody().getNextLink() != null;
     }
 
-    protected final Link nextPageLink() {
+    public R next() {
+        R resource = createResourceInstance(nextPageLink());
+        resource.setTemplatedBaseLink(templatedBaseLink);
+        return resource;
+    }
+
+    private Link nextPageLink() {
         Preconditions.checkState(hasNext(), "no next page available");
         loadIfNecessary();
         return responseEntity.getBody().getNextLink();
@@ -59,7 +80,13 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
         return responseEntity.getBody().getPreviousLink() != null;
     }
 
-    protected final Link previousPageLink() {
+    public R previous() {
+        R resource = createResourceInstance(previousPageLink());
+        resource.setTemplatedBaseLink(templatedBaseLink);
+        return resource;
+    }
+
+    private Link previousPageLink() {
         Preconditions.checkState(hasPrevious(), "no previous page available");
         loadIfNecessary();
         return responseEntity.getBody().getPreviousLink();
@@ -86,12 +113,6 @@ public abstract class AbstractPagedResource<T> extends AbstractRestClient {
                 entityForHALData,
                 getParameterizedTypeReference());
     }
-
-    /**
-     * Delegate creation of a properly typed {@link ParameterizedTypeReference} instance to the subclass so that the
-     * generic entity type T can be inferred by the RestTemplate.
-     */
-    protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReference();
 
     protected Link expandLink(final Link link, final Integer page, final Integer size, final String sortBy, final
     SortDirection direction) {

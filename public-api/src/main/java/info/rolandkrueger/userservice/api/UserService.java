@@ -29,6 +29,6 @@ public class UserService extends AbstractRestClient {
     }
 
     public AuthoritiesResource authorities() {
-        return new AuthoritiesResource(authoritiesLink, false);
+        return new AuthoritiesResource(authoritiesLink);
     }
 }

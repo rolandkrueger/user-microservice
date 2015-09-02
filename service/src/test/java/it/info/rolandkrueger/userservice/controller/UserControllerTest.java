@@ -53,6 +53,7 @@ public class UserControllerTest extends AbstractRestControllerTest {
 
         authorities = authorities.next();
         System.out.println("Page 2: " + authorities.getData());
+
     }
 
     @Test
