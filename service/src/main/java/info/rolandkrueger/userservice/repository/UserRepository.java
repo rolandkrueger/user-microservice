@@ -11,7 +11,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 /**
  * @author Roland Krüger
  */
-@RepositoryRestResource(excerptProjection = UserWithoutAuthoritiesProjection.class)
+@RepositoryRestResource
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     User findByUsername(@Param(RestApiConstants.USERNAME_PARAM) String username);

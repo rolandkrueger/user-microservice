@@ -3,13 +3,13 @@ package info.rolandkrueger.userservice.api.enums;
 /**
  * @author Roland Krüger
  */
-public enum Projections {
+public enum UserProjections {
 
     NO_AUTHORITIES_NO_PW(Values.NO_AUTHORITIES_NO_PW);
 
     private String name;
 
-    Projections(String name) {
+    UserProjections(String name) {
         this.name = name;
     }
 

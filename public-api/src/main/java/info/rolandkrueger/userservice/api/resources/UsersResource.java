@@ -1,12 +1,16 @@
 package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
+import info.rolandkrueger.userservice.api._internal.RestApiConstants;
+import info.rolandkrueger.userservice.api.enums.UserProjections;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.enums.SortDirection;
 import info.rolandkrueger.userservice.api.enums.UsersSort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+
+import java.util.Collections;
 
 /**
  * @author Roland Krüger
@@ -23,6 +27,10 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
 
     public UsersResource sort(UsersSort sortBy, SortDirection direction) {
         return sort(getSortByProperty(sortBy), direction);
+    }
+
+    public UsersResource useProjection(UserProjections projection) {
+        return new UsersResource(self.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection.getName())));
     }
 
     public UsersResource goToPageSorted(Integer page, Integer size, UsersSort sortBy, SortDirection
