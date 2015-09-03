@@ -1,6 +1,6 @@
 package info.rolandkrueger.userservice.model;
 
-import info.rolandkrueger.userservice.api.util.Projections;
+import info.rolandkrueger.userservice.api.enums.Projections;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.time.LocalDate;

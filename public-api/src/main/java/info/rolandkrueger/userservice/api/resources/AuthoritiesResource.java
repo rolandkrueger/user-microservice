@@ -1,7 +1,7 @@
 package info.rolandkrueger.userservice.api.resources;
 
-import info.rolandkrueger.userservice.api.util.AuthoritiesSort;
-import info.rolandkrueger.userservice.api.util.SortDirection;
+import info.rolandkrueger.userservice.api.enums.AuthoritiesSort;
+import info.rolandkrueger.userservice.api.enums.SortDirection;
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import org.springframework.core.ParameterizedTypeReference;

@@ -2,8 +2,8 @@ package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api.model.UserApiData;
-import info.rolandkrueger.userservice.api.util.SortDirection;
-import info.rolandkrueger.userservice.api.util.UsersSort;
+import info.rolandkrueger.userservice.api.enums.SortDirection;
+import info.rolandkrueger.userservice.api.enums.UsersSort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
