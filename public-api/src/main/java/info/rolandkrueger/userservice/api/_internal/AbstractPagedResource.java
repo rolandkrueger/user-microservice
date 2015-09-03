@@ -31,12 +31,6 @@ public abstract class AbstractPagedResource<T extends BaseApiData, R extends Abs
         this.templatedBaseLink = templatedBaseLink;
     }
 
-    /**
-     * Delegate creation of a properly typed {@link ParameterizedTypeReference} instance to the subclass so that the
-     * generic entity type T can be inferred by the RestTemplate.
-     */
-    protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReference();
-
     protected abstract R createResourceInstance(Link self);
 
     protected void setTemplatedBaseLink(Link templatedBaseLink) {
@@ -114,7 +108,7 @@ public abstract class AbstractPagedResource<T extends BaseApiData, R extends Abs
                 self.expand().getHref(),
                 HttpMethod.GET,
                 entityForHALData,
-                getParameterizedTypeReference());
+                getParameterizedTypeReferencePaged());
     }
 
     protected Link expandLink(final Link link, final Integer page, final Integer size, final String sortBy, final
@@ -137,4 +131,9 @@ public abstract class AbstractPagedResource<T extends BaseApiData, R extends Abs
         }});
     }
 
+    /**
+     * Delegate creation of a properly typed {@link ParameterizedTypeReference} instance to the subclass so that the
+     * generic entity type T can be inferred by the RestTemplate.
+     */
+    protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReferencePaged();
 }

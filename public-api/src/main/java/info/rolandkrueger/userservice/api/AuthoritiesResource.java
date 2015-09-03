@@ -5,6 +5,7 @@ import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.Resource;
 
 /**
  * @author Roland Krüger
@@ -13,12 +14,6 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
 
     AuthoritiesResource(Link templatedBaseLink) {
         super(templatedBaseLink, templatedBaseLink);
-    }
-
-    @Override
-    protected ParameterizedTypeReference<PagedResources<AuthorityApiData>> getParameterizedTypeReference() {
-        return new ParameterizedTypeReference<PagedResources<AuthorityApiData>>() {
-        };
     }
 
     @Override
@@ -43,4 +38,17 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
     protected Class<AuthorityApiData> getResourceType() {
         return AuthorityApiData.class;
     }
+
+    @Override
+    protected ParameterizedTypeReference<PagedResources<AuthorityApiData>> getParameterizedTypeReferencePaged() {
+        return new ParameterizedTypeReference<PagedResources<AuthorityApiData>>() {
+        };
+    }
+
+    @Override
+    protected ParameterizedTypeReference<AuthorityApiData> getParameterizedTypeReference() {
+        return new ParameterizedTypeReference<AuthorityApiData>() {
+        };
+    }
+
 }

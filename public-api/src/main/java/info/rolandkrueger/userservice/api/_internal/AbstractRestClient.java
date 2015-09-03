@@ -8,7 +8,6 @@ import org.springframework.hateoas.hal.HalLinkDiscoverer;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +20,16 @@ public abstract class AbstractRestClient {
 
     protected final RestTemplate restTemplate;
     protected final HttpEntity<String> entityForHALData;
+    private final static HttpHeaders HEADERS_FOR_HAL_DATA;
+
+    static {
+        HEADERS_FOR_HAL_DATA = new HttpHeaders();
+        HEADERS_FOR_HAL_DATA.setAccept(MediaType.parseMediaTypes("application/x-spring-data-verbose+json"));
+    }
 
     protected AbstractRestClient() {
         restTemplate = new RestTemplate();
-        HttpHeaders headersForHALData = new HttpHeaders();
-        headersForHALData.setAccept(MediaType.parseMediaTypes("application/x-spring-data-verbose+json"));
-        entityForHALData = new HttpEntity<>(headersForHALData);
+        entityForHALData = new HttpEntity<>(HEADERS_FOR_HAL_DATA);
     }
 
     protected Optional<Link> readLink(String targetURI, String content, String rel, int expectedLinks) {
