@@ -32,4 +32,12 @@ public class UserService extends AbstractRestClient {
     public AuthoritiesResource authorities() {
         return new AuthoritiesResource(authoritiesLink);
     }
+
+    public UserResource users() {
+        return new UserResource(usersLink);
+    }
+
+    public UserResource users(Integer page, Integer size) {
+        return users().goToPage(page, size);
+    }
 }
