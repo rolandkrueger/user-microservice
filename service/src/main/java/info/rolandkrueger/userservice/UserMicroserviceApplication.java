@@ -27,5 +27,7 @@ public class UserMicroserviceApplication extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**")
                 .permitAll();
+
+        http.csrf().disable();
     }
 }
