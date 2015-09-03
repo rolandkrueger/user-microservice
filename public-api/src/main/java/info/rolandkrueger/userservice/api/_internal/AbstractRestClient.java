@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractRestClient<T> {
+public abstract class AbstractRestClient {
 
     private Logger LOG = LoggerFactory.getLogger(getClass());
 
@@ -38,4 +38,5 @@ public abstract class AbstractRestClient<T> {
 
         return links.isEmpty() ? Optional.<Link>empty() : Optional.of(links.get(0));
     }
+
 }

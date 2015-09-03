@@ -4,11 +4,13 @@ import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api.SortDirection;
+import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,18 +18,17 @@ import java.util.HashMap;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractPagedResource<T, R extends AbstractPagedResource> extends AbstractRestClient<T> {
+public abstract class AbstractPagedResource<T extends BaseApiData, R extends AbstractPagedResource> extends
+        AbstractResource<T> {
 
     private Link templatedBaseLink;
-    protected Link self;
     private ResponseEntity<PagedResources<T>> responseEntity;
 
     protected AbstractPagedResource(Link templatedBaseLink, Link self) {
-        Preconditions.checkNotNull(self);
+        super(self);
         Preconditions.checkNotNull(templatedBaseLink);
 
         this.templatedBaseLink = templatedBaseLink;
-        this.self = self;
     }
 
     /**

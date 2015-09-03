@@ -38,4 +38,9 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
     private String getSortByProperty(AuthoritiesSort sortBy) {
         return sortBy == null ? null : sortBy.getProperty();
     }
+
+    @Override
+    protected Class<AuthorityApiData> getResourceType() {
+        return AuthorityApiData.class;
+    }
 }
