@@ -1,11 +1,12 @@
-package info.rolandkrueger.userservice.api;
+package info.rolandkrueger.userservice.api.resources;
 
+import info.rolandkrueger.userservice.api.util.AuthoritiesSort;
+import info.rolandkrueger.userservice.api.util.SortDirection;
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
 
 /**
  * @author Roland Krüger
@@ -14,11 +15,6 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
 
     AuthoritiesResource(Link templatedBaseLink) {
         super(templatedBaseLink, templatedBaseLink);
-    }
-
-    @Override
-    protected AuthoritiesResource createResourceInstance(Link self) {
-        return new AuthoritiesResource(self);
     }
 
     public AuthoritiesResource sort(AuthoritiesSort sortBy, SortDirection direction) {
@@ -30,8 +26,9 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
     }
 
-    private String getSortByProperty(AuthoritiesSort sortBy) {
-        return sortBy == null ? null : sortBy.getProperty();
+    @Override
+    protected AuthoritiesResource createResourceInstance(Link self) {
+        return new AuthoritiesResource(self);
     }
 
     @Override
@@ -49,6 +46,10 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
     protected ParameterizedTypeReference<AuthorityApiData> getParameterizedTypeReference() {
         return new ParameterizedTypeReference<AuthorityApiData>() {
         };
+    }
+
+    private String getSortByProperty(AuthoritiesSort sortBy) {
+        return sortBy == null ? null : sortBy.getProperty();
     }
 
 }

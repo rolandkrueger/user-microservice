@@ -1,5 +1,7 @@
 package info.rolandkrueger.userservice.api;
 
+import info.rolandkrueger.userservice.api.resources.UserService;
+
 /**
  * @author Roland Krüger
  */

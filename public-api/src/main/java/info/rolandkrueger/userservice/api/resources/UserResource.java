@@ -1,5 +1,6 @@
-package info.rolandkrueger.userservice.api;
+package info.rolandkrueger.userservice.api.resources;
 
+import info.rolandkrueger.userservice.api.util.UsersSort;
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import org.springframework.core.ParameterizedTypeReference;

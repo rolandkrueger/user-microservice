@@ -1,4 +1,4 @@
-package info.rolandkrueger.userservice.api;
+package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractRestClient;
 import org.springframework.hateoas.Link;

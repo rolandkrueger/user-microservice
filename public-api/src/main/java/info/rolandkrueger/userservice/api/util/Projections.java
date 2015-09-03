@@ -1,4 +1,4 @@
-package info.rolandkrueger.userservice.api;
+package info.rolandkrueger.userservice.api.util;
 
 /**
  * @author Roland Krüger
