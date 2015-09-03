@@ -1,13 +1,14 @@
 package info.rolandkrueger.userservice.api.model;
 
 import com.google.common.base.MoreObjects;
+import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
 
 import java.time.LocalDateTime;
 
 /**
  * @author Roland Krüger
  */
-public class AuthorityApiData {
+public class AuthorityApiData extends BaseApiData {
     private Long version;
     private LocalDateTime lastModified;
     private String authority;
