@@ -1,13 +1,13 @@
 package info.rolandkrueger.userservice.application;
 
-import javax.ws.rs.NotFoundException;
-
 import info.rolandkrueger.userservice.model.ServiceError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.ws.rs.NotFoundException;
 
 /**
  * @author Roland Krüger

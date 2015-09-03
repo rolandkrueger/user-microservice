@@ -1,9 +1,9 @@
 package info.rolandkrueger.userservice.service;
 
-import java.util.List;
-
 import info.rolandkrueger.userservice.model.Authority;
 import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 /**
  * @author Roland Krüger

@@ -10,10 +10,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.*;
-import static it.info.rolandkrueger.userservice.testsupport.Asserts.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.alice;
+import static it.info.rolandkrueger.userservice.testsupport.Asserts.assertUsersAreEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 /**
  * @author Roland Krüger

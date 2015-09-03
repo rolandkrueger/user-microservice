@@ -10,7 +10,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.*;
+import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.admins;
 import static it.info.rolandkrueger.userservice.testsupport.Asserts.*;
 
 /**

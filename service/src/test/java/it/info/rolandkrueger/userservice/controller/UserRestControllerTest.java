@@ -1,7 +1,5 @@
 package it.info.rolandkrueger.userservice.controller;
 
-import java.time.LocalDate;
-
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.service.UserService;
@@ -17,11 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.*;
+import java.time.LocalDate;
+
+import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.alice;
 import static it.info.rolandkrueger.userservice.testsupport.Asserts.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.core.Is.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Roland Krüger

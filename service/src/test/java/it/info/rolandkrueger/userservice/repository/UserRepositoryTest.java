@@ -1,7 +1,5 @@
 package it.info.rolandkrueger.userservice.repository;
 
-import javax.validation.ConstraintViolationException;
-
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.repository.UserRepository;
@@ -14,10 +12,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
+
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Roland Krüger

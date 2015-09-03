@@ -1,10 +1,10 @@
 package info.rolandkrueger.userservice.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import info.rolandkrueger.userservice.api.Projections;
 import org.springframework.data.rest.core.config.Projection;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author Roland Krüger

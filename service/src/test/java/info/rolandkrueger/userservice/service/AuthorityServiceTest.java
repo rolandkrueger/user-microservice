@@ -1,7 +1,5 @@
 package info.rolandkrueger.userservice.service;
 
-import java.util.List;
-
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.Authority;
 import org.junit.Test;
@@ -13,13 +11,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.*;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.collection.IsIterableContainingInOrder.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.number.OrderingComparison.*;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
 
 /**
  * @author Roland Krüger

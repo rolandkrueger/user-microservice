@@ -1,7 +1,5 @@
 package info.rolandkrueger.userservice.service;
 
-import java.util.List;
-
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.repository.AuthorityRepository;
@@ -9,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Roland Krüger

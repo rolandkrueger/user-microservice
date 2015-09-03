@@ -1,8 +1,5 @@
 package info.rolandkrueger.userservice.api._internal;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.MoreObjects;
-import info.rolandkrueger.userservice.api.SortDirection;
 import info.rolandkrueger.userservice.api.exceptions.UnexpectedAPIFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +9,6 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 

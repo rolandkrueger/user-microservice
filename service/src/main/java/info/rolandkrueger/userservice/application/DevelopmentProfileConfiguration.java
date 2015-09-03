@@ -1,9 +1,5 @@
 package info.rolandkrueger.userservice.application;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
 import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.repository.AuthorityRepository;
@@ -15,6 +11,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Roland Krüger
