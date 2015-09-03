@@ -61,51 +61,51 @@ public abstract class AbstractPagedResource<T extends BaseApiData, R extends Abs
         return resource;
     }
 
-    public final boolean hasNext() {
+    public final boolean hasNext() throws RestClientException {
         loadIfNecessary();
         return responseEntity.getBody().getNextLink() != null;
     }
 
-    public R next() {
+    public R next() throws RestClientException {
         R resource = createResourceInstance(nextPageLink());
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
     }
 
-    private Link nextPageLink() {
+    private Link nextPageLink() throws RestClientException {
         Preconditions.checkState(hasNext(), "no next page available");
         loadIfNecessary();
         return responseEntity.getBody().getNextLink();
     }
 
-    public final boolean hasPrevious() {
+    public final boolean hasPrevious() throws RestClientException {
         loadIfNecessary();
         return responseEntity.getBody().getPreviousLink() != null;
     }
 
-    public R previous() {
+    public R previous() throws RestClientException {
         R resource = createResourceInstance(previousPageLink());
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
     }
 
-    private Link previousPageLink() {
+    private Link previousPageLink() throws RestClientException {
         Preconditions.checkState(hasPrevious(), "no previous page available");
         loadIfNecessary();
         return responseEntity.getBody().getPreviousLink();
     }
 
-    public final Collection<T> getData() {
+    public final Collection<T> getData() throws RestClientException {
         loadIfNecessary();
         return responseEntity.getBody().getContent();
     }
 
-    public final PagedResources.PageMetadata getMetadata() {
+    public final PagedResources.PageMetadata getMetadata() throws RestClientException {
         loadIfNecessary();
         return responseEntity.getBody().getMetadata();
     }
 
-    private void loadIfNecessary() {
+    private void loadIfNecessary() throws RestClientException {
         if (responseEntity != null) {
             return;
         }
