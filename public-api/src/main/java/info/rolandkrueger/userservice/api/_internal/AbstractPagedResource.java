@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractPagedResource<T, R extends AbstractPagedResource> extends AbstractRestClient {
+public abstract class AbstractPagedResource<T, R extends AbstractPagedResource> extends AbstractRestClient<T> {
 
     private Link templatedBaseLink;
     protected Link self;

@@ -15,20 +15,15 @@ import java.util.Optional;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractRestClient {
+public abstract class AbstractRestClient<T> {
 
     private Logger LOG = LoggerFactory.getLogger(getClass());
 
     protected final RestTemplate restTemplate;
-    private final HttpEntity<String> entityForJSON;
     protected final HttpEntity<String> entityForHALData;
 
     protected AbstractRestClient() {
         restTemplate = new RestTemplate();
-        HttpHeaders headersForJSON = new HttpHeaders();
-        headersForJSON.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        entityForJSON = new HttpEntity<>(headersForJSON);
-
         HttpHeaders headersForHALData = new HttpHeaders();
         headersForHALData.setAccept(MediaType.parseMediaTypes("application/x-spring-data-verbose+json"));
         entityForHALData = new HttpEntity<>(headersForHALData);
@@ -42,12 +37,5 @@ public abstract class AbstractRestClient {
         }
 
         return links.isEmpty() ? Optional.<Link>empty() : Optional.of(links.get(0));
-    }
-
-    protected String doGetForJSON(String targetURI) {
-        LOG.debug("GET {}", targetURI);
-
-        ResponseEntity<String> responseEntity = restTemplate.exchange(targetURI, HttpMethod.GET, entityForJSON, String.class);
-        return responseEntity.getBody();
     }
 }
