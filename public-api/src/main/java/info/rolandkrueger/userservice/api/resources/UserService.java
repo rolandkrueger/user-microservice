@@ -1,28 +1,44 @@
 package info.rolandkrueger.userservice.api.resources;
 
 import com.google.common.base.Preconditions;
+import info.rolandkrueger.userservice.api._internal.AbstractResource;
 import info.rolandkrueger.userservice.api._internal.AbstractRestClient;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
+import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
+import info.rolandkrueger.userservice.api.exceptions.UnexpectedAPIFormatException;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 /**
  * @author Roland Krüger
  */
-public class UserService extends AbstractRestClient {
+public class UserService extends AbstractResource<BaseApiData> {
 
     private Link authoritiesLink;
     private Link usersLink;
 
-    UserService() {
+    public UserService(Link self) {
+        super(self);
     }
 
-    public void init(String targetURI) {
-        Preconditions.checkNotNull(targetURI);
+    @Override
+    protected Class<BaseApiData> getResourceType() {
+        return BaseApiData.class;
+    }
 
-        ResponseEntity<String> entity = restTemplate.getForEntity(targetURI, String.class);
-        authoritiesLink = readLink(targetURI, entity.getBody(), RestApiConstants.AUTHORITIES_RESOURCE, 1).get();
-        usersLink = readLink(targetURI, entity.getBody(), RestApiConstants.USERS_RESOURCE, 1).get();
+    @Override
+    protected ParameterizedTypeReference<BaseApiData> getParameterizedTypeReference() {
+        return new ParameterizedTypeReference<BaseApiData>() {
+        };
+    }
+
+    public void init() {
+        ResponseEntity<BaseApiData> responseEntity = getResponseEntity();
+        authoritiesLink = getLinkFor(responseEntity, RestApiConstants.AUTHORITIES_RESOURCE);
+        usersLink = getLinkFor(responseEntity, RestApiConstants.USERS_RESOURCE);
     }
 
     public AuthoritiesResource authorities(Integer page, Integer size) {

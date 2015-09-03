@@ -101,15 +101,18 @@ public abstract class AbstractPagedResource<T extends BaseApiData, R extends Abs
     }
 
     private void loadIfNecessary() throws RestClientException {
-        if (responseEntity != null) {
-            return;
+        if (responseEntity == null) {
+            responseEntity = restTemplate.exchange(
+                    self.expand().getHref(),
+                    HttpMethod.GET,
+                    entityForHALData,
+                    getParameterizedTypeReferencePaged());
         }
+    }
 
-        responseEntity = restTemplate.exchange(
-                self.expand().getHref(),
-                HttpMethod.GET,
-                entityForHALData,
-                getParameterizedTypeReferencePaged());
+    protected ResponseEntity<? extends Resources<T>> getPagedResponseEntity() {
+        loadIfNecessary();
+        return responseEntity;
     }
 
     protected Link expandLink(final Link link, final Integer page, final Integer size, final String sortBy, final

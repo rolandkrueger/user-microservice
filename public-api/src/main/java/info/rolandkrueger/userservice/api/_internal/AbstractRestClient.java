@@ -16,8 +16,6 @@ import java.util.Optional;
  */
 public abstract class AbstractRestClient {
 
-    private Logger LOG = LoggerFactory.getLogger(getClass());
-
     protected final RestTemplate restTemplate;
     protected final HttpEntity<String> entityForHALData;
     private final static HttpHeaders HEADERS_FOR_HAL_DATA;
@@ -31,15 +29,4 @@ public abstract class AbstractRestClient {
         restTemplate = new RestTemplate();
         entityForHALData = new HttpEntity<>(HEADERS_FOR_HAL_DATA);
     }
-
-    protected Optional<Link> readLink(String targetURI, String content, String rel, int expectedLinks) {
-        List<Link> links = new HalLinkDiscoverer().findLinksWithRel(rel, content);
-        if (expectedLinks > -1 && links.size() != expectedLinks) {
-            throw new UnexpectedAPIFormatException("Unexpected link structure at {2}: found {0} link(s) for " +
-                    "resource \"{1}\" at {2} ({3} expected)", links.size(), rel, targetURI, expectedLinks);
-        }
-
-        return links.isEmpty() ? Optional.<Link>empty() : Optional.of(links.get(0));
-    }
-
 }
