@@ -1,8 +1,9 @@
 package info.rolandkrueger.userservice.api.resources;
 
-import info.rolandkrueger.userservice.api.util.UsersSort;
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api.model.UserApiData;
+import info.rolandkrueger.userservice.api.util.SortDirection;
+import info.rolandkrueger.userservice.api.util.UsersSort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
@@ -10,19 +11,28 @@ import org.springframework.hateoas.PagedResources;
 /**
  * @author Roland Krüger
  */
-public class UserResource extends AbstractPagedResource<UserApiData, UserResource> {
+public class UsersResource extends AbstractPagedResource<UserApiData, UsersResource> {
 
-    protected UserResource(Link self) {
+    protected UsersResource(Link self) {
         this(self, self);
     }
 
-    protected UserResource(Link templatedBaseLink, Link self) {
+    protected UsersResource(Link templatedBaseLink, Link self) {
         super(templatedBaseLink, self);
     }
 
+    public UsersResource sort(UsersSort sortBy, SortDirection direction) {
+        return sort(getSortByProperty(sortBy), direction);
+    }
+
+    public UsersResource goToPageSorted(Integer page, Integer size, UsersSort sortBy, SortDirection
+            direction) {
+        return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
+    }
+
     @Override
-    protected UserResource createResourceInstance(Link self) {
-        return new UserResource(self);
+    protected UsersResource createResourceInstance(Link self) {
+        return new UsersResource(self);
     }
 
     @Override
