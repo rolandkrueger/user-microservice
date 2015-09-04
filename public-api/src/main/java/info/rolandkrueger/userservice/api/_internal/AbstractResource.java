@@ -42,10 +42,6 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
 
     protected abstract ParameterizedTypeReference<T> getParameterizedTypeReference();
 
-    protected final void setSelf(Link self) {
-        this.self = self;
-    }
-
     protected abstract Class<T> getResourceType();
 
     protected Link getProjectionLink(Link targetLink, String projection) {
