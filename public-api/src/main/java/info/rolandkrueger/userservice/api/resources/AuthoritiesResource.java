@@ -1,5 +1,6 @@
 package info.rolandkrueger.userservice.api.resources;
 
+import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.enums.AuthoritiesSort;
 import info.rolandkrueger.userservice.api.enums.SortDirection;
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
@@ -20,13 +21,17 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         super(templatedBaseLink, templatedBaseLink);
     }
 
-    public AuthoritiesResource sort(AuthoritiesSort sortBy, SortDirection direction) {
+    public final AuthoritiesResource sort(AuthoritiesSort sortBy, SortDirection direction) {
         return sort(getSortByProperty(sortBy), direction);
     }
 
-    public AuthoritiesResource goToPageSorted(Integer page, Integer size, AuthoritiesSort sortBy, SortDirection
+    public final AuthoritiesResource goToPageSorted(Integer page, Integer size, AuthoritiesSort sortBy, SortDirection
             direction) {
         return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
+    }
+
+    public final AuthoritiesSearchResource search() {
+        return new AuthoritiesSearchResource(getLinkFor(getResponseEntity(), RestApiConstants.SEARCH_RESOURCE));
     }
 
     @Override
@@ -51,10 +56,6 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         };
     }
 
-    private String getSortByProperty(AuthoritiesSort sortBy) {
-        return sortBy == null ? null : sortBy.getProperty();
-    }
-
     @Override
     public ResponseEntity<AuthorityApiData> create(AuthorityApiData entity) throws RestClientException {
         return createInternal(entity);
@@ -68,5 +69,9 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
     @Override
     public void update(AuthorityApiData entity) throws RestClientException {
         updateInternal(entity);
+    }
+
+    private String getSortByProperty(AuthoritiesSort sortBy) {
+        return sortBy == null ? null : sortBy.getProperty();
     }
 }
