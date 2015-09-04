@@ -1,38 +1,21 @@
 package info.rolandkrueger.userservice.api.resources;
 
-import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api._internal.AbstractResource;
-import info.rolandkrueger.userservice.api._internal.AbstractRestClient;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
-import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
-import info.rolandkrueger.userservice.api.exceptions.UnexpectedAPIFormatException;
+import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Optional;
 
 /**
  * @author Roland Krüger
  */
-public class UserService extends AbstractResource<BaseApiData> {
+public class UserService extends EmptyResource {
 
     private Link authoritiesLink;
     private Link usersLink;
 
     public UserService(Link self) {
         super(self);
-    }
-
-    @Override
-    protected Class<BaseApiData> getResourceType() {
-        return BaseApiData.class;
-    }
-
-    @Override
-    protected ParameterizedTypeReference<BaseApiData> getParameterizedTypeReference() {
-        return new ParameterizedTypeReference<BaseApiData>() {
-        };
     }
 
     public void init() {

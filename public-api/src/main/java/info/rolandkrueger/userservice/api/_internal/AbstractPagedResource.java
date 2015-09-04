@@ -4,7 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api.enums.SortDirection;
-import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
+import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractPagedResource<T extends BaseApiData, R extends AbstractPagedResource> extends
+public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R extends AbstractPagedResource> extends
         AbstractResource<T> {
 
     private ResponseEntity<PagedResources<T>> responseEntity;

@@ -1,7 +1,9 @@
 package info.rolandkrueger.userservice.api.model;
 
 import com.google.common.base.MoreObjects;
-import info.rolandkrueger.userservice.api._internal.model.BaseApiData;
+import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
+import info.rolandkrueger.userservice.api.resources.UserResource;
+import org.springframework.hateoas.Link;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * @author Roland Krüger
  */
-public class UserApiData extends BaseApiData {
+public class UserApiData extends AbstractBaseApiData<UserResource> {
     private String username;
     private String password;
     private String email;
@@ -135,5 +137,10 @@ public class UserApiData extends BaseApiData {
                 .add("username", username)
                 .add("fullname", fullName)
                 .toString();
+    }
+
+    @Override
+    protected UserResource createNewResource(Link self) {
+        return new UserResource(self, this);
     }
 }
