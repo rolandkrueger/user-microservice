@@ -48,25 +48,9 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
         return targetLink.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection));
     }
 
-    protected final ResponseEntity<T> createInternal(T entity) throws RestClientException {
-        return restTemplate.exchange(
-                self.expand().getHref(),
-                HttpMethod.POST,
-                new HttpEntity<>(entity, HEADERS),
-                getParameterizedTypeReference());
-    }
-
-    protected final void updateInternal(T entity) throws RestClientException {
-        restTemplate.put(entity.getSelf().expand().getHref(), entity);
-    }
-
     protected ResponseEntity<T> getResponseEntity() {
         loadIfNecessary();
         return responseEntity;
-    }
-
-    protected final void deleteInternal(T entity) throws RestClientException {
-        restTemplate.delete(entity.getSelf().expand().getHref());
     }
 
     private void loadIfNecessary() {
@@ -87,5 +71,21 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
 
         return linkOptional.orElseThrow(() -> new UnexpectedAPIFormatException("Link for resource" +
                 " \"{0}\" not found at {1}", rel, self));
+    }
+
+    protected final ResponseEntity<T> createInternal(T entity) throws RestClientException {
+        return restTemplate.exchange(
+                self.expand().getHref(),
+                HttpMethod.POST,
+                new HttpEntity<>(entity, HEADERS),
+                getParameterizedTypeReference());
+    }
+
+    protected final void updateInternal(T entity) throws RestClientException {
+        restTemplate.put(entity.getSelf().expand().getHref(), entity);
+    }
+
+    protected final void deleteInternal(T entity) throws RestClientException {
+        restTemplate.delete(entity.getSelf().expand().getHref());
     }
 }
