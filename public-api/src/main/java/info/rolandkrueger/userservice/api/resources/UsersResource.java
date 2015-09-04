@@ -27,17 +27,21 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
         super(templatedBaseLink, self);
     }
 
-    public UsersResource sort(UsersSort sortBy, SortDirection direction) {
+    public final UsersResource sort(UsersSort sortBy, SortDirection direction) {
         return sort(getSortByProperty(sortBy), direction);
     }
 
-    public UsersResource useProjection(UserProjections projection) {
+    public final UsersResource useProjection(UserProjections projection) {
         return new UsersResource(self.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection.getName())));
     }
 
-    public UsersResource goToPageSorted(Integer page, Integer size, UsersSort sortBy, SortDirection
+    public final UsersResource goToPageSorted(Integer page, Integer size, UsersSort sortBy, SortDirection
             direction) {
         return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
+    }
+
+    public final UsersSearchResource search() {
+        return new UsersSearchResource(getLinkFor(getResponseEntity(), RestApiConstants.SEARCH_RESOURCE));
     }
 
     @Override
@@ -62,10 +66,6 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
         };
     }
 
-    private String getSortByProperty(UsersSort sortBy) {
-        return sortBy == null ? null : sortBy.getProperty();
-    }
-
     @Override
     public void delete(UserApiData entity) throws RestClientException {
         deleteInternal(entity);
@@ -74,5 +74,9 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
     @Override
     public void update(UserApiData entity) throws RestClientException {
         updateInternal(entity);
+    }
+
+    private String getSortByProperty(UsersSort sortBy) {
+        return sortBy == null ? null : sortBy.getProperty();
     }
 }
