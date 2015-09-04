@@ -1,5 +1,6 @@
 package info.rolandkrueger.userservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -30,7 +31,7 @@ public class User implements UserDetails {
 
     @NotBlank
     private String username;
-    @NotBlank
+    @NotBlank @JsonIgnore
     private String password;
     @Email
     private String email;
@@ -45,6 +46,7 @@ public class User implements UserDetails {
     @NotNull
     private LocalDate registrationDate;
     private LocalDateTime lastLogin;
+    @JsonIgnore
     private List<Authority> authorities;
 
     public User() {
