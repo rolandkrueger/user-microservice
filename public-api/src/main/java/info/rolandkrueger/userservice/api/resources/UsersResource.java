@@ -9,13 +9,15 @@ import info.rolandkrueger.userservice.api.enums.UsersSort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.web.client.RestClientException;
 
 import java.util.Collections;
 
 /**
  * @author Roland Krüger
  */
-public class UsersResource extends AbstractPagedResource<UserApiData, UsersResource> {
+public class UsersResource extends AbstractPagedResource<UserApiData, UsersResource> implements
+        CanUpdate<UserApiData>, CanDelete<UserApiData> {
 
     protected UsersResource(Link self) {
         this(self, self);
@@ -62,5 +64,15 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
 
     private String getSortByProperty(UsersSort sortBy) {
         return sortBy == null ? null : sortBy.getProperty();
+    }
+
+    @Override
+    public void delete(UserApiData entity) throws RestClientException {
+        deleteInternal(entity);
+    }
+
+    @Override
+    public void update(UserApiData entity) throws RestClientException {
+        updateInternal(entity);
     }
 }

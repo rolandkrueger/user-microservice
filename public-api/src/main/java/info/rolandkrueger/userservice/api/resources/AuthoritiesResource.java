@@ -7,11 +7,14 @@ import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 
 /**
  * @author Roland Krüger
  */
-public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData, AuthoritiesResource> {
+public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData, AuthoritiesResource> implements
+        CanCreate<AuthorityApiData>, CanUpdate<AuthorityApiData>, CanDelete<AuthorityApiData> {
 
     AuthoritiesResource(Link templatedBaseLink) {
         super(templatedBaseLink, templatedBaseLink);
@@ -52,4 +55,18 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         return sortBy == null ? null : sortBy.getProperty();
     }
 
+    @Override
+    public ResponseEntity<AuthorityApiData> create(AuthorityApiData entity) throws RestClientException {
+        return createInternal(entity);
+    }
+
+    @Override
+    public void delete(AuthorityApiData entity) throws RestClientException {
+        deleteInternal(entity);
+    }
+
+    @Override
+    public void update(AuthorityApiData entity) throws RestClientException {
+        updateInternal(entity);
+    }
 }

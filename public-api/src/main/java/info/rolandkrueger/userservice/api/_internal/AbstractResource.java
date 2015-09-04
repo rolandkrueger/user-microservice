@@ -36,7 +36,7 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
 
     protected abstract Class<T> getResourceType();
 
-    public final ResponseEntity<T> create(T entity) throws RestClientException {
+    protected final ResponseEntity<T> createInternal(T entity) throws RestClientException {
         return restTemplate.exchange(
                 self.expand().getHref(),
                 HttpMethod.POST,
@@ -44,7 +44,7 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
                 getParameterizedTypeReference());
     }
 
-    public final void update(T entity) throws RestClientException {
+    protected final void updateInternal(T entity) throws RestClientException {
         restTemplate.put(entity.getSelf().expand().getHref(), entity);
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
         return responseEntity;
     }
 
-    public final void delete(T entity) throws RestClientException {
+    protected final void deleteInternal(T entity) throws RestClientException {
         restTemplate.delete(entity.getSelf().expand().getHref());
     }
 
