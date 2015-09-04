@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * @author Roland Krüger
  */
 @Projection(name = UserProjections.Values.NO_AUTHORITIES_NO_PW, types = User.class)
-public interface UserWithoutAuthoritiesProjection {
+public interface UserWithoutAuthoritiesAndPasswordProjection {
     boolean isAccountNonExpired();
 
     boolean isAccountNonLocked();
