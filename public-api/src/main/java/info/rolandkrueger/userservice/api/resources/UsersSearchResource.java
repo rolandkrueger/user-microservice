@@ -2,13 +2,10 @@ package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api._internal.AbstractResource;
-import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
-
-import java.util.Collections;
 
 /**
  * @author Roland Krüger
@@ -35,14 +32,14 @@ public class UsersSearchResource extends AbstractResource<UserApiData> {
     }
 
     public final UsersSearchResultResource findByRegistrationConfirmationToken(String registrationConfirmationToken) {
-        return new UsersSearchResultResource(getFindByRegistrationConfirmationToken().expand(registrationConfirmationToken));
+        return new UsersSearchResultResource(getFindByRegistrationConfirmationTokenLink().expand(registrationConfirmationToken));
     }
 
     private Link getFindByUsernameLink() {
         return getLinkFor(getResponseEntity(), "findByUsername");
     }
 
-    private Link getFindByRegistrationConfirmationToken() {
+    private Link getFindByRegistrationConfirmationTokenLink() {
         return getLinkFor(getResponseEntity(), "findByRegistrationConfirmationToken");
     }
 
