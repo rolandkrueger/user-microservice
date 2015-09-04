@@ -36,9 +36,8 @@ public class UserService extends AbstractResource<BaseApiData> {
     }
 
     public void init() {
-        ResponseEntity<BaseApiData> responseEntity = getResponseEntity();
-        authoritiesLink = getLinkFor(responseEntity, RestApiConstants.AUTHORITIES_RESOURCE);
-        usersLink = getLinkFor(responseEntity, RestApiConstants.USERS_RESOURCE);
+        authoritiesLink = getLinkFor(getResponseEntity(), RestApiConstants.AUTHORITIES_RESOURCE);
+        usersLink = getLinkFor(getResponseEntity(), RestApiConstants.USERS_RESOURCE);
     }
 
     public AuthoritiesResource authorities(Integer page, Integer size) {
