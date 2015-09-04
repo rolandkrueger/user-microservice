@@ -10,6 +10,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.http.*;
 import org.springframework.web.client.RestClientException;
 
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -18,6 +19,7 @@ import java.util.Optional;
 public abstract class AbstractResource<T extends BaseApiData> extends AbstractRestClient {
 
     protected Link self;
+    protected Link templatedBaseLink;
     private final static HttpHeaders HEADERS;
     private ResponseEntity<T> responseEntity;
 
@@ -27,14 +29,28 @@ public abstract class AbstractResource<T extends BaseApiData> extends AbstractRe
         HEADERS.setContentType(MediaType.APPLICATION_JSON);
     }
 
-    public AbstractResource(Link self) {
+    public AbstractResource(Link templatedBaseLink) {
+        this(templatedBaseLink, templatedBaseLink);
+    }
+
+    public AbstractResource(Link templatedBaseLink, Link self) {
         Preconditions.checkNotNull(self);
+        Preconditions.checkNotNull(templatedBaseLink);
         this.self = self;
+        this.templatedBaseLink = templatedBaseLink;
     }
 
     protected abstract ParameterizedTypeReference<T> getParameterizedTypeReference();
 
+    protected final void setSelf(Link self) {
+        this.self = self;
+    }
+
     protected abstract Class<T> getResourceType();
+
+    protected Link getProjectionLink(Link targetLink, String projection) {
+        return targetLink.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection));
+    }
 
     protected final ResponseEntity<T> createInternal(T entity) throws RestClientException {
         return restTemplate.exchange(

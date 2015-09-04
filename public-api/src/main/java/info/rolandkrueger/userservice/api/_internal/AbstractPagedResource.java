@@ -22,14 +22,10 @@ import java.util.HashMap;
 public abstract class AbstractPagedResource<T extends BaseApiData, R extends AbstractPagedResource> extends
         AbstractResource<T> {
 
-    private Link templatedBaseLink;
     private ResponseEntity<PagedResources<T>> responseEntity;
 
     protected AbstractPagedResource(Link templatedBaseLink, Link self) {
-        super(self);
-        Preconditions.checkNotNull(templatedBaseLink);
-
-        this.templatedBaseLink = templatedBaseLink;
+        super(templatedBaseLink, self);
     }
 
     protected abstract R createResourceInstance(Link self);

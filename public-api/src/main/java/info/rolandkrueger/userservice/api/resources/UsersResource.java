@@ -32,7 +32,7 @@ public class UsersResource extends AbstractPagedResource<UserApiData, UsersResou
     }
 
     public final UsersResource useProjection(UserProjections projection) {
-        return new UsersResource(self.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection.getName())));
+        return new UsersResource(getProjectionLink(templatedBaseLink, projection.getName()));
     }
 
     public final UsersResource goToPageSorted(Integer page, Integer size, UsersSort sortBy, SortDirection
