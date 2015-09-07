@@ -2,6 +2,7 @@ package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api._internal.AbstractResource;
+import info.rolandkrueger.userservice.api.model.EmptyApiData;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
@@ -10,21 +11,21 @@ import org.springframework.hateoas.PagedResources;
 /**
  * @author Roland Krüger
  */
-public class UsersSearchResource extends AbstractResource<UserApiData> {
+public class UsersSearchResource extends AbstractResource<EmptyApiData> {
 
     public UsersSearchResource(Link self) {
         super(self);
     }
 
     @Override
-    protected ParameterizedTypeReference<UserApiData> getParameterizedTypeReference() {
-        return new ParameterizedTypeReference<UserApiData>() {
+    protected ParameterizedTypeReference<EmptyApiData> getParameterizedTypeReference() {
+        return new ParameterizedTypeReference<EmptyApiData>() {
         };
     }
 
     @Override
-    protected Class<UserApiData> getResourceType() {
-        return UserApiData.class;
+    protected Class<EmptyApiData> getResourceType() {
+        return EmptyApiData.class;
     }
 
     public final UsersSearchResultResource findByUsername(String username) {
@@ -51,12 +52,13 @@ public class UsersSearchResource extends AbstractResource<UserApiData> {
 
         @Override
         protected ParameterizedTypeReference<UserApiData> getParameterizedTypeReference() {
-            return UsersSearchResource.this.getParameterizedTypeReference();
+            return new ParameterizedTypeReference<UserApiData>() {
+            };
         }
 
         @Override
         protected Class<UserApiData> getResourceType() {
-            return UsersSearchResource.this.getResourceType();
+            return UserApiData.class;
         }
 
         @Override
