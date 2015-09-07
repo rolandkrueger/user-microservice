@@ -63,7 +63,13 @@ public class AuthorityRestController_ReadSearchTest extends AbstractRestControll
     }
 
     @Test
-    public void testSearchFindOne() {
+    public void testFindByAuthority_isNullSafe() {
+        Optional<AuthorityApiData> optional = searchResource.findByAuthority(null).getData().stream().findFirst();
+        assertThat("unexpectedly found authority for null search", optional.isPresent(), is(false));
+    }
+
+    @Test
+    public void testFindOneByAuthority() {
         Optional<AuthorityApiData> foundAuthority = searchResource.findOneByAuthority("users");
         assertThat("didn't find created authority", foundAuthority.isPresent(), is(true));
         assertThat("found authority doesn't match created authority",
@@ -71,6 +77,13 @@ public class AuthorityRestController_ReadSearchTest extends AbstractRestControll
                 is(true));
 
         foundAuthority = searchResource.findOneByAuthority("not_available");
+        assertThat("found authority that is expected to not be available", foundAuthority.isPresent(), is(false));
+    }
+
+
+    @Test
+    public void testFindOneByAuthority_isNullSafe() {
+        Optional<AuthorityApiData> foundAuthority = searchResource.findOneByAuthority(null);
         assertThat("found authority that is expected to not be available", foundAuthority.isPresent(), is(false));
     }
 }
