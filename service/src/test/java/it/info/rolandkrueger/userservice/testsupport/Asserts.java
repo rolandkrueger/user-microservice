@@ -1,5 +1,7 @@
 package it.info.rolandkrueger.userservice.testsupport;
 
+import com.google.common.base.Preconditions;
+import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.model.User;
 import org.springframework.http.HttpStatus;
@@ -29,9 +31,9 @@ public class Asserts {
         assertThat(actual.getRegistrationConfirmationToken(), is(expected.getRegistrationConfirmationToken()));
     }
 
-    public static void assertAuthoritiesAreEqual(Authority actual, Authority expected) {
-        assertThat(actual, is(expected));
-        assertThat(actual.getId(), is(expected.getId()));
-        assertThat(actual.getDescription(), is(expected.getDescription()));
+    public static boolean authoritiesMatch(AuthorityApiData expected, AuthorityApiData actual) {
+        Preconditions.checkNotNull(expected);
+        Preconditions.checkNotNull(actual);
+        return expected.getAuthority().equals(actual.getAuthority()) && expected.getDescription().equals(actual.getDescription());
     }
 }
