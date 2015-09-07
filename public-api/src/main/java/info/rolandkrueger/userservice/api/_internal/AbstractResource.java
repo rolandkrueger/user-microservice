@@ -89,7 +89,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
                 getParameterizedTypeReference());
     }
 
-    public final T read() {
+    public T read() {
         return getResponseEntity().getBody();
     }
 

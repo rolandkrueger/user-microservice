@@ -136,4 +136,13 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
      * generic entity type T can be inferred by the RestTemplate.
      */
     protected abstract ParameterizedTypeReference<PagedResources<T>> getParameterizedTypeReferencePaged();
+
+    /**
+     * Reading single items is not supported for paged resources.
+     * @throws UnsupportedOperationException
+     */
+    @Override
+    public T read() {
+        throw new UnsupportedOperationException();
+    }
 }
