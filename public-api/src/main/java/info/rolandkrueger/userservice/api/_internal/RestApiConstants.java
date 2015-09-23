@@ -8,8 +8,6 @@ public final class RestApiConstants {
     private RestApiConstants() {
     }
 
-    public static final String SELF = "self";
-
     public static final String AUTHORITIES_RESOURCE = "authorities";
     public static final String USERS_RESOURCE = "users";
     public static final String REGISTRATIONS_RESOURCE = "registrations";
