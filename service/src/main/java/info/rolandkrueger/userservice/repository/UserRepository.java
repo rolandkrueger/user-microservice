@@ -6,6 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Roland Krüger
@@ -15,7 +16,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     User findByUsername(@Param(RestApiConstants.USERNAME_PARAM) String username);
 
-    User findByRegistrationConfirmationToken(@Param(RestApiConstants.TOKEN_PARAM) String registrationConfirmationToken);
+    @RestResource(exported = false)
+    User findByRegistrationConfirmationToken(String registrationConfirmationToken);
 
     @RestResource(exported = false)
     @Override Iterable<User> findAll();

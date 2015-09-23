@@ -13,6 +13,7 @@ public class UserService extends EmptyResource {
 
     private Link authoritiesLink;
     private Link usersLink;
+    private Link registrationsLink;
 
     public UserService(Link self) {
         super(self);
@@ -21,6 +22,7 @@ public class UserService extends EmptyResource {
     public void init() {
         authoritiesLink = getLinkFor(getResponseEntity(), RestApiConstants.AUTHORITIES_RESOURCE);
         usersLink = getLinkFor(getResponseEntity(), RestApiConstants.USERS_RESOURCE);
+        registrationsLink = getLinkFor(getResponseEntity(), RestApiConstants.REGISTRATIONS_RESOURCE);
     }
 
     public AuthoritiesResource authorities(Integer page, Integer size) {
@@ -37,5 +39,9 @@ public class UserService extends EmptyResource {
 
     public UsersResource users(Integer page, Integer size) {
         return users().goToPage(page, size);
+    }
+
+    public UserRegistrationsResource userRegistrations() {
+        return new UserRegistrationsResource(registrationsLink);
     }
 }
