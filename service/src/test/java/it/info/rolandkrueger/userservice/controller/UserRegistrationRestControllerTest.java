@@ -1,16 +1,20 @@
 package it.info.rolandkrueger.userservice.controller;
 
+import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.UserRegistrationsResource;
+import info.rolandkrueger.userservice.api.resources.UsersSearchResource;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestClientException;
 
-import static junit.framework.Assert.fail;
+import java.util.Optional;
+
+import static org.junit.Assert.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -69,13 +73,27 @@ public class UserRegistrationRestControllerTest extends AbstractRestControllerTe
                         .userRegistrations()
                         .findByToken("invalid");
 
-        try {
-            registrationSearchResultResource.read();
-        } catch (HttpStatusCodeException exc) {
-            assertThat(exc.getStatusCode(), is(HttpStatus.NOT_FOUND));
-            return;
-        }
-        fail("404 Not Found expected");
+        assertThat(registrationSearchResultResource.exists(), is(false));
+    }
+
+    @Test
+    public void testConfirmRegistration() {
+        ResponseEntity<UserRegistrationApiData> registrationResponse = executeTestRegistration();
+        UserRegistrationsResource.UserRegistrationSearchResultResource registrationSearchResultResource =
+                service()
+                        .userRegistrations()
+                        .findByToken(registrationResponse.getBody().getRegistrationConfirmationToken());
+
+        assertThat(registrationSearchResultResource.exists(), is(true));
+        ResponseEntity confirmationResponse = registrationSearchResultResource.confirmRegistration();
+        assertThat(confirmationResponse.getStatusCode(), is(HttpStatus.OK));
+
+        Optional<UserApiData> registeredUserOptional = service().users().search().findByUsername("test").getData().stream().findFirst();
+        assertThat(registeredUserOptional.isPresent(), is(true));
+
+        UserApiData registeredUser = registeredUserOptional.get();
+        assertThat(registeredUser.getRegistrationConfirmationToken(), is(nullValue()));
+        assertThat(registeredUser.isEnabled(), is(true));
     }
 
     private ResponseEntity<UserRegistrationApiData> executeTestRegistration() {

@@ -6,6 +6,7 @@ import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
 /**
@@ -43,6 +44,19 @@ public class UserRegistrationsResource extends AbstractResource<UserRegistration
 
         public UserRegistrationSearchResultResource(Link self) {
             super(self);
+        }
+
+        public final boolean exists() {
+            try {
+                read();
+            } catch (HttpStatusCodeException exc) {
+                return false;
+            }
+            return true;
+        }
+
+        public final ResponseEntity confirmRegistration() {
+            return restTemplate.postForEntity(getLinkFor(getResponseEntity(), RestApiConstants.CONFIRM).getHref(), null, ResponseEntity.class);
         }
 
         @Override

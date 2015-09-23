@@ -1,13 +1,17 @@
 package info.rolandkrueger.userservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
+import info.rolandkrueger.userservice.controller.UserRegistrationRestController;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
 /**
  * @author Roland Krüger
  */
 public class UserRegistrationResource extends ResourceSupport {
+
     private String forUsername;
     private String email;
     private String fullName;
@@ -20,6 +24,9 @@ public class UserRegistrationResource extends ResourceSupport {
         forUsername = user.getUsername();
         email = user.getEmail();
         fullName = user.getFullName();
+
+        add(ControllerLinkBuilder.linkTo(UserRegistrationRestController.class).slash(user
+                .getRegistrationConfirmationToken()).slash(RestApiConstants.CONFIRM).withRel(RestApiConstants.CONFIRM));
     }
 
     public UserRegistrationResource(UserRegistrationApiData userRegistration) {

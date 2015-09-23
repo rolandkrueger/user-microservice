@@ -18,4 +18,5 @@ public final class RestApiConstants {
     public static final String TOKEN_PARAM = "token";
 
     public static final String PROJECTION = "projection";
+    public static final String CONFIRM = "confirm";
 }

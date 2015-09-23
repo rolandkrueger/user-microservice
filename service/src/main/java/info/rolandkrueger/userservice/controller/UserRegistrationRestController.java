@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.POST;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -63,6 +65,20 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
 
         userRegistration.setRegistrationConfirmationToken(newUser.getRegistrationConfirmationToken());
         return new ResponseEntity<>(new UserRegistrationResource(userRegistration), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "{token}/confirm", method = RequestMethod.POST)
+    public ResponseEntity confirmRegistration(@PathVariable("token") String registrationConfirmationToken) {
+        User user = userRepository.findByRegistrationConfirmationToken(registrationConfirmationToken);
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        user.clearRegistrationConfirmationToken();
+        user.setEnabled(true);
+
+        userRepository.save(user);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override
