@@ -11,7 +11,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
  */
 public class UserRegistrationResource extends ResourceSupport {
 
-    private String forUsername;
+    private String username;
     private String email;
     private String registrationConfirmationToken;
 
@@ -19,7 +19,7 @@ public class UserRegistrationResource extends ResourceSupport {
     }
 
     public UserRegistrationResource(User user) {
-        forUsername = user.getUsername();
+        username = user.getUsername();
         email = user.getEmail();
         registrationConfirmationToken = user.getRegistrationConfirmationToken();
 
@@ -28,13 +28,13 @@ public class UserRegistrationResource extends ResourceSupport {
     }
 
     public UserRegistrationResource(UserRegistrationApiData userRegistration) {
-        this.forUsername = userRegistration.getUsername();
+        this.username = userRegistration.getUsername();
         this.email = userRegistration.getEmail();
         this.registrationConfirmationToken = userRegistration.getRegistrationConfirmationToken();
     }
 
-    public String getForUsername() {
-        return forUsername;
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
