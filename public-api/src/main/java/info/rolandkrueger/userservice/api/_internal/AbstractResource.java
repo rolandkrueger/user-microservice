@@ -56,7 +56,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         return targetLink.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection));
     }
 
-    protected ResponseEntity<T> getResponseEntity() {
+    protected ResponseEntity<T> getResponseEntity() throws RestClientException {
         loadIfNecessary();
         return responseEntity;
     }
@@ -89,7 +89,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
                 getParameterizedTypeReference());
     }
 
-    public T read() {
+    public T read() throws RestClientException {
         return getResponseEntity().getBody();
     }
 
