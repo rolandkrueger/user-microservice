@@ -31,7 +31,7 @@ public class UserRegistrationResource extends ResourceSupport {
     }
 
     public UserRegistrationResource(UserRegistrationApiData userRegistration) {
-        this.forUsername = userRegistration.getForUsername();
+        this.forUsername = userRegistration.getUsername();
         this.email = userRegistration.getEmail();
         this.fullName = userRegistration.getFullName();
         this.registrationConfirmationToken = userRegistration.getRegistrationConfirmationToken();

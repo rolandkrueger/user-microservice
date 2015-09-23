@@ -9,7 +9,7 @@ import org.springframework.hateoas.Link;
  * @author Roland Krüger
  */
 public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistrationsResource> {
-    private String forUsername;
+    private String username;
     private String password;
     private String email;
     private String fullName;
@@ -23,12 +23,12 @@ public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistratio
         this.registrationConfirmationToken = registrationConfirmationToken;
     }
 
-    public String getForUsername() {
-        return forUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setForUsername(String forUsername) {
-        this.forUsername = forUsername.trim();
+    public void setUsername(String username) {
+        this.username = username.trim();
     }
 
     public String getPassword() {
@@ -63,7 +63,7 @@ public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistratio
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(UserRegistrationApiData.class)
-                .add("username", forUsername)
+                .add("username", username)
                 .add("fullName", fullName)
                 .add("email", email)
                 .toString();

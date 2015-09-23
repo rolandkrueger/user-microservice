@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.POST;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -47,18 +45,17 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UserRegistrationResource> registerUser(@RequestBody UserRegistrationApiData
                                                                              userRegistration) {
-        if (Strings.isNullOrEmpty(userRegistration.getForUsername())) {
+        if (Strings.isNullOrEmpty(userRegistration.getUsername())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.findByUsername(userRegistration.getForUsername()) != null) {
+        if (userRepository.findByUsername(userRegistration.getUsername()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
-        User newUser = new User(userRegistration.getForUsername());
+        User newUser = new User(userRegistration.getUsername());
         newUser.setEmail(userRegistration.getEmail());
         newUser.setUnencryptedPassword(userRegistration.getPassword());
-        newUser.setFullName(userRegistration.getFullName());
         newUser.createRegistrationConfirmationToken();
         newUser.setEnabled(false);
         userRepository.save(newUser);

@@ -3,11 +3,9 @@ package it.info.rolandkrueger.userservice.controller;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.UserRegistrationsResource;
-import info.rolandkrueger.userservice.api.resources.UsersSearchResource;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -63,7 +61,7 @@ public class UserRegistrationRestControllerTest extends AbstractRestControllerTe
         UserRegistrationApiData registrationData = registrationSearchResultResource.read();
 
         assertThat(registrationData, is(notNullValue()));
-        assertThat(registrationData.getForUsername(), is("test"));
+        assertThat(registrationData.getUsername(), is("test"));
     }
 
     @Test
@@ -103,7 +101,7 @@ public class UserRegistrationRestControllerTest extends AbstractRestControllerTe
 
     private UserRegistrationApiData createTestRegistration() {
         UserRegistrationApiData registration = new UserRegistrationApiData();
-        registration.setForUsername("test");
+        registration.setUsername("test");
         registration.setEmail("test@example.com");
         registration.setFullName("Test test");
         registration.setPassword("passw0rd");
