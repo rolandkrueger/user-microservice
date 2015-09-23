@@ -16,7 +16,6 @@ public class UserApiData extends AbstractBaseApiData<UserResource> {
     private String username;
     private String password;
     private String email;
-    private String fullName;
     private boolean enabled;
     private boolean accountNonLocked;
     private boolean accountNonExpired;
@@ -49,14 +48,6 @@ public class UserApiData extends AbstractBaseApiData<UserResource> {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public boolean isEnabled() {
@@ -135,7 +126,6 @@ public class UserApiData extends AbstractBaseApiData<UserResource> {
     public String toString() {
         return MoreObjects.toStringHelper(UserApiData.class)
                 .add("username", username)
-                .add("fullname", fullName)
                 .toString();
     }
 
