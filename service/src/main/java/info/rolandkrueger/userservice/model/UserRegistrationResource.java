@@ -24,6 +24,7 @@ public class UserRegistrationResource extends ResourceSupport {
         forUsername = user.getUsername();
         email = user.getEmail();
         fullName = user.getFullName();
+        registrationConfirmationToken = user.getRegistrationConfirmationToken();
 
         add(ControllerLinkBuilder.linkTo(UserRegistrationRestController.class).slash(user
                 .getRegistrationConfirmationToken()).slash(RestApiConstants.CONFIRM).withRel(RestApiConstants.CONFIRM));

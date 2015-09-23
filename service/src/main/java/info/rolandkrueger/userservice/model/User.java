@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Version
     Long version = 1L;
     @LastModifiedDate
-    LocalDateTime lastModified = LocalDateTime.now();
+    LocalDateTime lastModified;
 
     @NotBlank
     private String username;
