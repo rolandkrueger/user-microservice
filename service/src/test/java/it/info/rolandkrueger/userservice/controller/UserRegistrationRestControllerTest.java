@@ -103,7 +103,6 @@ public class UserRegistrationRestControllerTest extends AbstractRestControllerTe
         UserRegistrationApiData registration = new UserRegistrationApiData();
         registration.setUsername("test");
         registration.setEmail("test@example.com");
-        registration.setFullName("Test test");
         registration.setPassword("passw0rd");
         return registration;
     }

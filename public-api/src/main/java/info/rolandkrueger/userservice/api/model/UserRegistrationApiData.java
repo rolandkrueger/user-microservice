@@ -12,7 +12,6 @@ public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistratio
     private String username;
     private String password;
     private String email;
-    private String fullName;
     private String registrationConfirmationToken;
 
     public String getRegistrationConfirmationToken() {
@@ -47,14 +46,6 @@ public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistratio
         this.email = email;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     @Override
     protected UserRegistrationsResource createNewResource(Link self) {
         return new UserRegistrationsResource(self);
@@ -64,7 +55,6 @@ public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistratio
     public String toString() {
         return MoreObjects.toStringHelper(UserRegistrationApiData.class)
                 .add("username", username)
-                .add("fullName", fullName)
                 .add("email", email)
                 .toString();
     }
