@@ -34,7 +34,6 @@ public class UserRepositoryTest {
         user = new User("user");
         user.setUnencryptedPassword("password");
         user.setEmail("user@example.com");
-        user.setFullName("John Doe");
     }
 
     @Autowired

@@ -1,6 +1,5 @@
 package info.rolandkrueger.userservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.controller.UserRegistrationRestController;
@@ -14,7 +13,6 @@ public class UserRegistrationResource extends ResourceSupport {
 
     private String forUsername;
     private String email;
-    private String fullName;
     private String registrationConfirmationToken;
 
     protected UserRegistrationResource() {
@@ -23,7 +21,6 @@ public class UserRegistrationResource extends ResourceSupport {
     public UserRegistrationResource(User user) {
         forUsername = user.getUsername();
         email = user.getEmail();
-        fullName = user.getFullName();
         registrationConfirmationToken = user.getRegistrationConfirmationToken();
 
         add(ControllerLinkBuilder.linkTo(UserRegistrationRestController.class).slash(user
@@ -33,7 +30,6 @@ public class UserRegistrationResource extends ResourceSupport {
     public UserRegistrationResource(UserRegistrationApiData userRegistration) {
         this.forUsername = userRegistration.getUsername();
         this.email = userRegistration.getEmail();
-        this.fullName = userRegistration.getFullName();
         this.registrationConfirmationToken = userRegistration.getRegistrationConfirmationToken();
     }
 
@@ -43,10 +39,6 @@ public class UserRegistrationResource extends ResourceSupport {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 
     public String getRegistrationConfirmationToken() {

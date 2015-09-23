@@ -47,7 +47,6 @@ public class UserController {
         userFromDB.setCredentialsNonExpired(user.isCredentialsNonExpired());
         userFromDB.setEmail(user.getEmail());
         userFromDB.setEnabled(user.isEnabled());
-        userFromDB.setFullName(user.getFullName());
         userFromDB.setRememberMeToken(user.getRememberMeToken());
 
         userFromDB.getAuthorities().clear();

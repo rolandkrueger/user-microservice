@@ -25,7 +25,6 @@ public class Asserts {
 
     public static void assertUsersAreEqual(User actual, User expected) {
         assertThat(actual, is(expected));
-        assertThat(actual.getFullName(), is(expected.getFullName()));
         assertThat(actual.getEmail(), is(expected.getEmail()));
         assertThat(actual.getAuthorities(), containsInAnyOrder(expected.getAuthorities().toArray()));
         assertThat(actual.getRegistrationConfirmationToken(), is(expected.getRegistrationConfirmationToken()));

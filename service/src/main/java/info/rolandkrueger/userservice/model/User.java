@@ -35,7 +35,6 @@ public class User implements UserDetails {
     private String password;
     @Email
     private String email;
-    private String fullName;
 
     private boolean enabled = true;
     private boolean accountNonLocked = true;
@@ -142,14 +141,6 @@ public class User implements UserDetails {
         setPassword(new BCryptPasswordEncoder(12, new SecureRandom()).encode(password));
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public void addAuthority(Authority authority) {
         if (authorities == null) {
             authorities = new ArrayList<>();
@@ -238,7 +229,6 @@ public class User implements UserDetails {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("username", username)
-                .add("fullname", fullName)
                 .add("token", registrationConfirmationToken)
                 .add("roles", authorities)
                 .toString();

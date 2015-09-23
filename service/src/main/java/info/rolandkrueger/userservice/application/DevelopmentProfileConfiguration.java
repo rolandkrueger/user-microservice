@@ -44,7 +44,6 @@ public class DevelopmentProfileConfiguration implements ApplicationListener<Cont
 
         bob = new User("bob");
         bob.setUnencryptedPassword("bob");
-        bob.setFullName("Bob");
         bob.addAuthority(developers);
         bob.addAuthority(users);
 
