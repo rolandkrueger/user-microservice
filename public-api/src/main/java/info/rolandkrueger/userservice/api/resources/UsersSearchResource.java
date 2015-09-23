@@ -32,16 +32,8 @@ public class UsersSearchResource extends AbstractResource<EmptyApiData> {
         return new UsersSearchResultResource(getFindByUsernameLink().expand(username));
     }
 
-    public final UsersSearchResultResource findByRegistrationConfirmationToken(String registrationConfirmationToken) {
-        return new UsersSearchResultResource(getFindByRegistrationConfirmationTokenLink().expand(registrationConfirmationToken));
-    }
-
     private Link getFindByUsernameLink() {
         return getLinkFor(getResponseEntity(), "findByUsername");
-    }
-
-    private Link getFindByRegistrationConfirmationTokenLink() {
-        return getLinkFor(getResponseEntity(), "findByRegistrationConfirmationToken");
     }
 
     public class UsersSearchResultResource extends AbstractPagedResource<UserApiData, UsersSearchResultResource> {
