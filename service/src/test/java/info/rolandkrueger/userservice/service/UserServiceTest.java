@@ -1,8 +1,10 @@
-package it.info.rolandkrueger.userservice.service;
+package info.rolandkrueger.userservice.service;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.service.UserService;
+import it.info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,18 @@ import static org.hamcrest.Matchers.nullValue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
 @Transactional
-public class UserServiceTest {
+public class UserServiceTest extends AbstractServiceTest {
+
+    @Autowired
+    private AuthorityService authorityService;
 
     @Autowired
     private UserService userService;
+
+    @Before
+    public void setUp() {
+        createTestData(authorityService, userService);
+    }
 
     @Test
     public void testFindByRegistrationConfirmationToken() {

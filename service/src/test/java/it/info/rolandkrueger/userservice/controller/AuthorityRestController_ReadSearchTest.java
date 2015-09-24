@@ -1,12 +1,20 @@
 package it.info.rolandkrueger.userservice.controller;
 
+import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesSearchResource;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -18,6 +26,9 @@ import static org.hamcrest.Matchers.is;
 /**
  * @author Roland Krüger
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
+@WebIntegrationTest(randomPort = true)
 public class AuthorityRestController_ReadSearchTest extends AbstractRestControllerTest {
 
     private static AuthorityApiData admins;
@@ -27,9 +38,12 @@ public class AuthorityRestController_ReadSearchTest extends AbstractRestControll
     private static AuthoritiesResource authoritiesResource;
     private static AuthoritiesSearchResource searchResource;
 
+    @Value("${local.server.port}")
+    private int port;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
+        setPort(port);
         deleteAllUsers();
         deleteAllAuthorities();
 

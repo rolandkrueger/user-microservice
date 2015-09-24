@@ -1,11 +1,17 @@
 package it.info.rolandkrueger.userservice.controller;
 
+import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
@@ -15,12 +21,19 @@ import static org.hamcrest.Matchers.is;
 /**
  * @author Roland Krüger
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
+@WebIntegrationTest(randomPort = true)
 public class AuthorityRestController_IncorrectUsageTest extends AbstractRestControllerTest {
 
     private AuthoritiesResource authoritiesResource;
 
+    @Value("${local.server.port}")
+    private int port;
+
     @Before
     public void setUp() {
+        setPort(port);
         deleteAllUsers();
         deleteAllAuthorities();
         authoritiesResource = service().authorities();

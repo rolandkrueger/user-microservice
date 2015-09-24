@@ -20,13 +20,18 @@ import org.springframework.web.client.RestTemplate;
  */
 public abstract class AbstractRestControllerTest {
 
-    private final static String CONTEXT_PATH = "http://localhost:8080";
+    private final static String CONTEXT_PATH = "http://localhost:";
 
     private static UserService service;
+    private static int port = 8080;
+
+    protected static void setPort(int port) {
+        AbstractRestControllerTest.port = port;
+    }
 
     protected static UserService service() {
         if (service == null) {
-            service = UserServiceAPI.init(CONTEXT_PATH);
+            service = UserServiceAPI.init(CONTEXT_PATH + port);
         }
         return service;
     }

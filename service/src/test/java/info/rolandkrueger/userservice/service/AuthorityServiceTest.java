@@ -2,6 +2,8 @@ package info.rolandkrueger.userservice.service;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.Authority;
+import it.info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +29,24 @@ import static org.hamcrest.number.OrderingComparison.greaterThan;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
 @Transactional
-public class AuthorityServiceTest {
+public class AuthorityServiceTest extends AbstractServiceTest {
 
     @Autowired
     private AuthorityService authorityService;
+
+    @Autowired
+    private UserService userService;
+
+    @Before
+    public void setUp() {
+        createTestData(authorityService, userService);
+    }
 
     @Test
     public void testFindByAuthority() throws Exception {
         final Authority authority = authorityService.findByAuthority("admin");
         assertThat(authority, is(notNullValue()));
-        assertThat(authority.getDescription(), is(admins.getDescription()));
+        assertThat(authority.getDescription(), is(adminAuthority.getDescription()));
     }
 
     @Test
@@ -48,10 +58,10 @@ public class AuthorityServiceTest {
     @Test
     public void testGetAuthorityList() throws Exception {
         List<Authority> authorityList = authorityService.getAuthorityList(0, 3, Sort.Direction.ASC);
-        assertThat(authorityList, contains(admins, developers, users));
+        assertThat(authorityList, contains(adminAuthority, developerAuthority, userAuthority));
 
         authorityList = authorityService.getAuthorityList(0, 3, Sort.Direction.DESC);
-        assertThat(authorityList, contains(users, developers, admins));
+        assertThat(authorityList, contains(userAuthority, developerAuthority, adminAuthority));
     }
 
     @Test
@@ -67,16 +77,16 @@ public class AuthorityServiceTest {
 
     @Test(expected = DataIntegrityViolationException.class)
     public void testCreate_FailsWithDuplicate() throws Exception {
-        Authority authority = new Authority(admins.getAuthority());
+        Authority authority = new Authority(adminAuthority.getAuthority());
         authorityService.create(authority);
     }
 
     @Test
     public void testUpdate() throws Exception {
-        final Authority admin = authorityService.findByAuthority(admins.getAuthority());
+        final Authority admin = authorityService.findByAuthority(adminAuthority.getAuthority());
         admin.setDescription("test");
         final Authority updated = authorityService.update(admin);
-        assertThat(updated.getId(), is(admins.getId()));
+        assertThat(updated.getId(), is(adminAuthority.getId()));
         assertThat(updated.getDescription(), is("test"));
     }
 
@@ -95,8 +105,8 @@ public class AuthorityServiceTest {
 
     @Test(expected = DataIntegrityViolationException.class)
     public void testDelete_WithForeignKeyConstraintViolation() throws Exception {
-        authorityService.delete(admins.getId());
-        assertThat(authorityService.findByAuthority(admins.getAuthority()), is(nullValue()));
+        authorityService.delete(adminAuthority.getId());
+        assertThat(authorityService.findByAuthority(adminAuthority.getAuthority()), is(nullValue()));
     }
 
     @Test
