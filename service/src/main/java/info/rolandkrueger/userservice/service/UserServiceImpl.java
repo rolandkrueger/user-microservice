@@ -31,4 +31,14 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserList(int page, int size,  Sort.Direction sort) {
         return userRepository.findAll(new PageRequest(page, size, sort, "username")).getContent();
     }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 }
