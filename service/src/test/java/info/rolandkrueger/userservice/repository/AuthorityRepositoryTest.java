@@ -41,6 +41,7 @@ public class AuthorityRepositoryTest {
 
     @Test
     public void testFindByAuthority() {
+        authorityRepository.save(new Authority("user"));
         Authority foundAuthority = authorityRepository.findByAuthority("user");
         assertThat(foundAuthority, is(notNullValue()));
 
