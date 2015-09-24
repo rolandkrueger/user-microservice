@@ -22,8 +22,6 @@ public interface UserFullDataProjection {
 
     String getUsername();
 
-    String getFullName();
-
     String getRememberMeToken();
 
     String getRegistrationConfirmationToken();

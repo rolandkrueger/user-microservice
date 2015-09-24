@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 public interface UserExcerptProjection {
     String getUsername();
 
-    String getFullName();
-
     LocalDate getRegistrationDate();
 
     LocalDateTime getLastLogin();
