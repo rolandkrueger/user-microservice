@@ -32,8 +32,16 @@ public class UsersSearchResource extends AbstractResource<EmptyApiData> {
         return new UsersSearchResultResource(getFindByUsernameLink().expand(username));
     }
 
+    public final UsersSearchResultResource findUserForLogin(String username) {
+        return new UsersSearchResultResource(getFindUserForLoginLink().expand(username));
+    }
+
     private Link getFindByUsernameLink() {
         return getLinkFor(getResponseEntity(), "findByUsername");
+    }
+
+    private Link getFindUserForLoginLink() {
+        return getLinkFor(getResponseEntity(), "findUserForLogin");
     }
 
     public class UsersSearchResultResource extends AbstractPagedResource<UserApiData, UsersSearchResultResource> {
