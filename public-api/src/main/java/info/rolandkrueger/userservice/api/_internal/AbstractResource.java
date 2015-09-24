@@ -97,6 +97,10 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         restTemplate.put(entity.getSelf().expand().getHref(), entity);
     }
 
+    protected final void updateInternal(Link target, T entity) throws RestClientException {
+        restTemplate.put(target.expand().getHref(), entity);
+    }
+
     protected final void deleteInternal(T entity) throws RestClientException {
         restTemplate.delete(entity.getSelf().expand().getHref());
     }

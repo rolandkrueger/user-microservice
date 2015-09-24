@@ -2,6 +2,8 @@ package it.info.rolandkrueger.userservice.testsupport;
 
 import info.rolandkrueger.userservice.api.UserServiceAPI;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
+import info.rolandkrueger.userservice.api.model.UserApiData;
+import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
 import info.rolandkrueger.userservice.api.resources.AuthorityResource;
 import info.rolandkrueger.userservice.api.resources.UserService;
@@ -9,6 +11,7 @@ import info.rolandkrueger.userservice.api.resources.UsersResource;
 import org.junit.AfterClass;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,4 +52,23 @@ public abstract class AbstractRestControllerTest {
         authorityApiData.setAuthority(authority);
         authorityApiData.setDescription("The " + authority + " role");
         return service().authorities().create(authorityApiData).getBody();
-    }}
+    }
+
+    protected static UserApiData registerUser(String username, String password, String email) {
+        ResponseEntity<UserRegistrationApiData> registrationResponse =
+                service()
+                        .userRegistrations()
+                        .create(username, password, email);
+
+        service()
+                .userRegistrations()
+                .findByToken(registrationResponse.getBody().getRegistrationConfirmationToken())
+                .confirmRegistration();
+
+        return service()
+                .users()
+                .search()
+                .findByUsername(username).getData().stream().findFirst().get();
+    }
+
+}

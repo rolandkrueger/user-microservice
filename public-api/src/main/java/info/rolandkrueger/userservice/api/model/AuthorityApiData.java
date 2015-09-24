@@ -20,6 +20,11 @@ public class AuthorityApiData extends AbstractBaseApiData<AuthorityResource> {
     public AuthorityApiData() {
     }
 
+    public AuthorityApiData(String authority, String description) {
+        setAuthority(authority);
+        setDescription(description);
+    }
+
     public Long getVersion() {
         return version;
     }

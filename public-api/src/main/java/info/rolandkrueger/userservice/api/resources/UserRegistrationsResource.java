@@ -19,6 +19,14 @@ public class UserRegistrationsResource extends AbstractResource<UserRegistration
         super(self);
     }
 
+    public ResponseEntity<UserRegistrationApiData> create(String username, String password, String email) throws RestClientException {
+        UserRegistrationApiData entity = new UserRegistrationApiData();
+        entity.setUsername(username);
+        entity.setPassword(password);
+        entity.setEmail(email);
+        return create(entity);
+    }
+
     @Override
     public ResponseEntity<UserRegistrationApiData> create(UserRegistrationApiData entity) throws RestClientException {
         return super.createInternal(entity);

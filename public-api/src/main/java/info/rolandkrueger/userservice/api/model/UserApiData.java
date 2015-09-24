@@ -1,12 +1,14 @@
 package info.rolandkrueger.userservice.api.model;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import info.rolandkrueger.userservice.api.resources.UserResource;
 import org.springframework.hateoas.Link;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -115,6 +117,9 @@ public class UserApiData extends AbstractBaseApiData<UserResource> {
     }
 
     public List<AuthorityApiData> getAuthorities() {
+        if (authorities == null) {
+            authorities = Lists.newArrayList();
+        }
         return authorities;
     }
 

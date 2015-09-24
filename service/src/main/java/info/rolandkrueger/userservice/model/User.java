@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
+import org.springframework.hateoas.Identifiable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -22,7 +23,7 @@ import java.util.*;
  * @author Roland Krüger
  */
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, Identifiable<Long> {
     private Long id;
     @Version
     Long version = 1L;
@@ -65,7 +66,7 @@ public class User implements UserDetails {
         return id;
     }
 
-    private void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
