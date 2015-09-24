@@ -1,9 +1,9 @@
-package it.info.rolandkrueger.userservice.controller;
+package info.rolandkrueger.userservice.controller;
 
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.UserRegistrationsResource;
-import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
+import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;

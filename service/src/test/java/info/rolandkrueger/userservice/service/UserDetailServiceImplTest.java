@@ -1,10 +1,9 @@
-package it.info.rolandkrueger.userservice.service;
+package info.rolandkrueger.userservice.service;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.service.StaticEndpointProvider;
 import info.rolandkrueger.userservice.api.service.UserDetailServiceImpl;
-import info.rolandkrueger.userservice.service.exception.UserNotFoundException;
-import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
+import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

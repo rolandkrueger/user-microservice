@@ -2,7 +2,7 @@ package info.rolandkrueger.userservice.service;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.Authority;
-import it.info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
+import info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

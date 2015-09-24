@@ -2,7 +2,7 @@ package info.rolandkrueger.userservice.service;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.User;
-import it.info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
+import info.rolandkrueger.userservice.testsupport.AbstractServiceTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static it.info.rolandkrueger.userservice.testsupport.Asserts.assertUsersAreEqual;
+import static info.rolandkrueger.userservice.testsupport.Asserts.assertUsersAreEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;

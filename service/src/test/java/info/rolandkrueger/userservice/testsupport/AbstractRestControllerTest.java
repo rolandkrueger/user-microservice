@@ -1,4 +1,4 @@
-package it.info.rolandkrueger.userservice.testsupport;
+package info.rolandkrueger.userservice.testsupport;
 
 import info.rolandkrueger.userservice.api.UserServiceAPI;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;

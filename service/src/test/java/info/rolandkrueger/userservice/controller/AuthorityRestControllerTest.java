@@ -1,10 +1,10 @@
-package it.info.rolandkrueger.userservice.controller;
+package info.rolandkrueger.userservice.controller;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesSearchResource;
-import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
+import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
-import static it.info.rolandkrueger.userservice.testsupport.Asserts.authoritiesMatch;
+import static info.rolandkrueger.userservice.testsupport.Asserts.authoritiesMatch;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;

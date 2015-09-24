@@ -1,4 +1,4 @@
-package it.info.rolandkrueger.userservice.testsupport;
+package info.rolandkrueger.userservice.testsupport;
 
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;

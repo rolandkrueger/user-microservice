@@ -1,8 +1,7 @@
-package it.info.rolandkrueger.userservice.controller;
+package info.rolandkrueger.userservice.controller;
 
 import info.rolandkrueger.userservice.api.model.UserApiData;
-import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
-import org.hamcrest.Matcher;
+import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 

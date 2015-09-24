@@ -1,8 +1,7 @@
-package it.info.rolandkrueger.userservice.repository;
+package info.rolandkrueger.userservice.repository;
 
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.model.Authority;
-import info.rolandkrueger.userservice.repository.AuthorityRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
