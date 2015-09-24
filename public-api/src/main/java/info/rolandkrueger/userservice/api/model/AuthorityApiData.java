@@ -4,13 +4,14 @@ import com.google.common.base.MoreObjects;
 import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import info.rolandkrueger.userservice.api.resources.AuthorityResource;
 import org.springframework.hateoas.Link;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
 
 /**
  * @author Roland Krüger
  */
-public class AuthorityApiData extends AbstractBaseApiData<AuthorityResource> {
+public class AuthorityApiData extends AbstractBaseApiData<AuthorityResource> implements GrantedAuthority {
     private Long version;
     private LocalDateTime lastModified;
     private String authority;

@@ -5,15 +5,18 @@ import com.google.common.collect.Lists;
 import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import info.rolandkrueger.userservice.api.resources.UserResource;
 import org.springframework.hateoas.Link;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * @author Roland Krüger
  */
-public class UserApiData extends AbstractBaseApiData<UserResource> {
+public class UserApiData extends AbstractBaseApiData<UserResource> implements UserDetails {
     private String username;
     private String password;
     private String email;
