@@ -2,7 +2,6 @@ package info.rolandkrueger.userservice.api._internal;
 
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
-import info.rolandkrueger.userservice.api.exceptions.UnexpectedAPIFormatException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
@@ -77,8 +76,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
                 .filter(link -> link.getRel().equals(rel))
                 .findAny();
 
-        return linkOptional.orElseThrow(() -> new UnexpectedAPIFormatException("Link for resource" +
-                " \"{0}\" not found at {1}", rel, self));
+        return linkOptional.orElse(null);
     }
 
     protected final ResponseEntity<T> createInternal(T entity) throws RestClientException {
