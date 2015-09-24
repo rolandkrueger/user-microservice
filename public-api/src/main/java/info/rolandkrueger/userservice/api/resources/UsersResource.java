@@ -19,11 +19,11 @@ import java.util.Collections;
 public class UsersResource extends AbstractPagedResource<UserApiData, UsersResource> implements
         CanUpdate<UserApiData>, CanDelete<UserApiData> {
 
-    protected UsersResource(Link self) {
+    UsersResource(Link self) {
         this(self, self);
     }
 
-    protected UsersResource(Link templatedBaseLink, Link self) {
+    UsersResource(Link templatedBaseLink, Link self) {
         super(templatedBaseLink, self);
     }
 

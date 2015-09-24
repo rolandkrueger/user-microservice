@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
  */
 public class ConfirmRegistrationResource extends AbstractResource<EmptyApiData> {
 
-    public ConfirmRegistrationResource(Link self) {
+    ConfirmRegistrationResource(Link self) {
         super(self);
     }
 

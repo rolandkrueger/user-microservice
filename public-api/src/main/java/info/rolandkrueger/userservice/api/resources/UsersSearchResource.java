@@ -13,7 +13,7 @@ import org.springframework.hateoas.PagedResources;
  */
 public class UsersSearchResource extends AbstractResource<EmptyApiData> {
 
-    public UsersSearchResource(Link self) {
+    UsersSearchResource(Link self) {
         super(self);
     }
 
@@ -38,7 +38,7 @@ public class UsersSearchResource extends AbstractResource<EmptyApiData> {
 
     public class UsersSearchResultResource extends AbstractPagedResource<UserApiData, UsersSearchResultResource> {
 
-        private UsersSearchResultResource(Link self) {
+        UsersSearchResultResource(Link self) {
             super(self, self);
         }
 

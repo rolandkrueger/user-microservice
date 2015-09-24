@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 public class AuthoritiesSearchResource extends AbstractResource<EmptyApiData> {
 
-    public AuthoritiesSearchResource(Link self) {
+    AuthoritiesSearchResource(Link self) {
         super(self);
     }
 
