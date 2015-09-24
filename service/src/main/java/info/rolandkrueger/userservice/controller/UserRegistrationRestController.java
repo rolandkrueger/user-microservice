@@ -5,7 +5,7 @@ import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.model.UserRegistrationResource;
 import info.rolandkrueger.userservice.model.User;
-import info.rolandkrueger.userservice.repository.UserRepository;
+import info.rolandkrueger.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryLinksResource;
 import org.springframework.hateoas.*;
@@ -25,11 +25,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 public class UserRegistrationRestController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @RequestMapping(RestApiConstants.SEARCH_RESOURCE)
     public ResponseEntity<UserRegistrationResource> searchRegistration(@RequestParam String token) {
-        User user = userRepository.findByRegistrationConfirmationToken(token);
+        User user = userService.findByRegistrationConfirmationToken(token);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -49,7 +49,7 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.findByUsername(userRegistration.getUsername()) != null) {
+        if (userService.findUserByUsername(userRegistration.getUsername()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
@@ -58,7 +58,7 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
         newUser.setUnencryptedPassword(userRegistration.getPassword());
         newUser.createRegistrationConfirmationToken();
         newUser.setEnabled(false);
-        userRepository.save(newUser);
+        userService.save(newUser);
 
         userRegistration.setRegistrationConfirmationToken(newUser.getRegistrationConfirmationToken());
         return new ResponseEntity<>(new UserRegistrationResource(userRegistration), HttpStatus.CREATED);
@@ -66,7 +66,7 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
 
     @RequestMapping(value = "{token}/confirm", method = RequestMethod.POST)
     public ResponseEntity confirmRegistration(@PathVariable("token") String registrationConfirmationToken) {
-        User user = userRepository.findByRegistrationConfirmationToken(registrationConfirmationToken);
+        User user = userService.findByRegistrationConfirmationToken(registrationConfirmationToken);
         if (user == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
@@ -74,7 +74,7 @@ public class UserRegistrationRestController implements ResourceProcessor<Reposit
         user.clearRegistrationConfirmationToken();
         user.setEnabled(true);
 
-        userRepository.save(user);
+        userService.save(user);
         return new ResponseEntity(HttpStatus.OK);
     }
 
