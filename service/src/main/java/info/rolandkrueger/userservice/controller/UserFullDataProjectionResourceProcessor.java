@@ -1,7 +1,6 @@
 package info.rolandkrueger.userservice.controller;
 
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
-import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.model.UserFullDataProjection;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceProcessor;

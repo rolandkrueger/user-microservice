@@ -1,6 +1,5 @@
 package it.info.rolandkrueger.userservice.controller;
 
-import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import static it.info.rolandkrueger.userservice.testsupport.Asserts.authoritiesMatch;

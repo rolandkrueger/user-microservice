@@ -5,15 +5,9 @@ import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
-import info.rolandkrueger.userservice.api.resources.AuthorityResource;
 import info.rolandkrueger.userservice.api.resources.UserService;
 import info.rolandkrueger.userservice.api.resources.UsersResource;
-import org.junit.AfterClass;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Roland Krüger

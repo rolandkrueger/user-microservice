@@ -3,8 +3,8 @@ package info.rolandkrueger.userservice.controller;
 import com.google.common.base.Strings;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
-import info.rolandkrueger.userservice.model.UserRegistrationResource;
 import info.rolandkrueger.userservice.model.User;
+import info.rolandkrueger.userservice.model.UserRegistrationResource;
 import info.rolandkrueger.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryLinksResource;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**

@@ -1,7 +1,6 @@
 package info.rolandkrueger.userservice.api.model;
 
 import com.google.common.base.MoreObjects;
-import info.rolandkrueger.userservice.api._internal.AbstractResource;
 import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
 import info.rolandkrueger.userservice.api.resources.AuthorityResource;
 import org.springframework.hateoas.Link;

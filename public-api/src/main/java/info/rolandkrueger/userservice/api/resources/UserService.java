@@ -1,9 +1,6 @@
 package info.rolandkrueger.userservice.api.resources;
 
-import info.rolandkrueger.userservice.api._internal.AbstractResource;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
-import info.rolandkrueger.userservice.api._internal.model.AbstractBaseApiData;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 
 /**

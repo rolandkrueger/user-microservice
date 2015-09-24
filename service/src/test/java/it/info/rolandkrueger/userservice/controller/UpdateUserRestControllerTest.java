@@ -1,38 +1,19 @@
 package it.info.rolandkrueger.userservice.controller;
 
-import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.enums.UserProjections;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
 import info.rolandkrueger.userservice.api.model.UserApiData;
-import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
-import info.rolandkrueger.userservice.model.User;
-import info.rolandkrueger.userservice.service.UserService;
 import it.info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static info.rolandkrueger.userservice.application.DevelopmentProfileConfiguration.alice;
-import static it.info.rolandkrueger.userservice.testsupport.Asserts.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Matchers.isNull;
-import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Roland Krüger

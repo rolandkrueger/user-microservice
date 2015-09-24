@@ -2,16 +2,14 @@ package info.rolandkrueger.userservice.api.resources;
 
 import info.rolandkrueger.userservice.api._internal.AbstractPagedResource;
 import info.rolandkrueger.userservice.api._internal.RestApiConstants;
-import info.rolandkrueger.userservice.api.enums.UserProjections;
-import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.enums.SortDirection;
+import info.rolandkrueger.userservice.api.enums.UserProjections;
 import info.rolandkrueger.userservice.api.enums.UsersSort;
+import info.rolandkrueger.userservice.api.model.UserApiData;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.web.client.RestClientException;
-
-import java.util.Collections;
 
 /**
  * @author Roland Krüger

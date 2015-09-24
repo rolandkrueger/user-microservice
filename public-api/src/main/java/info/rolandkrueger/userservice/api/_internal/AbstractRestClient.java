@@ -1,15 +1,9 @@
 package info.rolandkrueger.userservice.api._internal;
 
-import info.rolandkrueger.userservice.api.exceptions.UnexpectedAPIFormatException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.hal.HalLinkDiscoverer;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Roland Krüger

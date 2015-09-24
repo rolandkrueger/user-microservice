@@ -2,7 +2,6 @@ package it.info.rolandkrueger.userservice.testsupport;
 
 import com.google.common.base.Preconditions;
 import info.rolandkrueger.userservice.api.model.AuthorityApiData;
-import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
