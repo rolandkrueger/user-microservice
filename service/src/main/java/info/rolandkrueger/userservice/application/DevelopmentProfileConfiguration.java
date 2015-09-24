@@ -25,27 +25,27 @@ public class DevelopmentProfileConfiguration implements ApplicationListener<Cont
 
     private final static Logger LOG = LoggerFactory.getLogger(DevelopmentProfileConfiguration.class);
 
-    public final static Authority admins, users, developers;
+    public final static Authority adminAuthority, userAuthority, developerAuthority;
     public final static User alice, bob, charly;
 
     static {
         LOG.info("Creating test data: authorities 'admin', 'user', 'developer'");
 
-        admins = new Authority("admin", "The admin role");
-        users = new Authority("user", "The user role");
-        developers = new Authority("developer", "The developer role");
+        adminAuthority = new Authority("admin", "The admin role");
+        userAuthority = new Authority("user", "The user role");
+        developerAuthority = new Authority("developer", "The developer role");
 
         LOG.info("Creating test data: users 'alice', 'bob', 'charly'");
         alice = new User("alice");
         alice.setUnencryptedPassword("alice");
         alice.createRegistrationConfirmationToken();
         alice.setEmail("alice@example.com");
-        alice.addAuthority(admins);
+        alice.addAuthority(adminAuthority);
 
         bob = new User("bob");
         bob.setUnencryptedPassword("bob");
-        bob.addAuthority(developers);
-        bob.addAuthority(users);
+        bob.addAuthority(developerAuthority);
+        bob.addAuthority(userAuthority);
 
         charly = new User("charly");
         charly.setLastLogin(LocalDateTime.now());
@@ -65,7 +65,7 @@ public class DevelopmentProfileConfiguration implements ApplicationListener<Cont
     }
 
     private void saveAuthorities() {
-        authorityRepository.save(Arrays.asList(admins, users, developers));
+        authorityRepository.save(Arrays.asList(adminAuthority, userAuthority, developerAuthority));
     }
 
     private void saveUsers() {
