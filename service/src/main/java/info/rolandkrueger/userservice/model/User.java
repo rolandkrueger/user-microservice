@@ -231,7 +231,7 @@ public class User implements UserDetails, Identifiable<Long> {
         return MoreObjects.toStringHelper(this)
                 .add("username", username)
                 .add("token", registrationConfirmationToken)
-                .add("roles", authorities)
+                .add("authorities", authorities)
                 .toString();
     }
 
