@@ -9,6 +9,7 @@ import org.springframework.hateoas.Link;
  * @author Roland Krüger
  */
 public class EmptyResource extends AbstractResource<EmptyApiData> {
+
     public EmptyResource(Link self) {
         super(self);
     }

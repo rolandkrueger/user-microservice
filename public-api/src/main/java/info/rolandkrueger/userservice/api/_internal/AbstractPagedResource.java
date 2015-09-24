@@ -19,8 +19,7 @@ import java.util.HashMap;
 /**
  * @author Roland Krüger
  */
-public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R extends AbstractPagedResource> extends
-        AbstractResource<T> {
+public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R extends AbstractPagedResource> extends AbstractResource<T> {
 
     private ResponseEntity<PagedResources<T>> responseEntity;
 
@@ -139,6 +138,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
 
     /**
      * Reading single items is not supported for paged resources.
+     *
      * @throws UnsupportedOperationException
      */
     @Override
