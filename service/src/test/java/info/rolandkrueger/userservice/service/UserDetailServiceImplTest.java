@@ -36,9 +36,7 @@ public class UserDetailServiceImplTest extends AbstractRestControllerTest {
     public void setUp() {
         setPort(port);
         deleteAllUsers();
-        endpointProvider = new StaticEndpointProvider();
-        endpointProvider.setEndpoint("http://localhost:" + port);
-
+        endpointProvider = new StaticEndpointProvider("http://localhost:" + port);
         userDetailService = new UserDetailServiceImpl(endpointProvider);
     }
 

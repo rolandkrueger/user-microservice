@@ -11,12 +11,12 @@ public class StaticEndpointProvider implements UserMicroserviceEndpointProvider 
 
     private String endpoint;
 
+    public StaticEndpointProvider(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
     @Override
     public String getUserMicroserviceEndpoint() {
         return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
     }
 }
