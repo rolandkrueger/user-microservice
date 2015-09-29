@@ -33,9 +33,7 @@ public abstract class AbstractServiceTest {
 
         Arrays.asList(adminAuthority, userAuthority, developerAuthority)
                 .stream()
-                .forEach(authority -> {
-                    authorityService.create(authority);
-                });
+                .forEach(authorityService::create);
 
         alice = new User("alice");
         alice.setUnencryptedPassword("alice");

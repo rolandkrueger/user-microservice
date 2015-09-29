@@ -10,6 +10,9 @@ public class StaticEndpointProvider implements UserMicroserviceEndpointProvider 
 
     private String endpoint;
 
+    protected StaticEndpointProvider() {
+    }
+
     public StaticEndpointProvider(String endpoint) {
         this.endpoint = endpoint;
     }

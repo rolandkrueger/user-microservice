@@ -1,9 +1,15 @@
 package info.rolandkrueger.userservice.controller;
 
+import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
@@ -13,12 +19,19 @@ import static org.hamcrest.Matchers.is;
 /**
  * @author Roland Krüger
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
+@WebIntegrationTest(randomPort = true)
 public class UserRestControllerTest extends AbstractRestControllerTest {
 
     private UserApiData alice;
 
+    @Value("${local.server.port}")
+    private int port;
+
     @Before
     public void setUp() {
+        setPort(port);
         deleteAllUsers();
         alice = registerUser("alice", "passw0rd", "alice@example.com");
     }
