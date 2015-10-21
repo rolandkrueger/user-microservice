@@ -6,7 +6,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Link;
 
 /**
+ * Resource class which does not manage any real resource but which maintain a list of links to other resources.
+ *
  * @author Roland Krüger
+ * @see EmptyApiData
  */
 public class EmptyResource extends AbstractResource<EmptyApiData> {
 

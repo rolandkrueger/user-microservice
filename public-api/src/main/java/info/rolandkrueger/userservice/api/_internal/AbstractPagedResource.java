@@ -90,6 +90,11 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
         return responseEntity.getBody().getContent();
     }
 
+    /**
+     * Provides the paging meta data for this paged resource which include the total number of elements an pages among others.
+     *
+     * @throws RestClientException when an error occurred while communicating with the service
+     */
     public final PagedResources.PageMetadata getMetadata() throws RestClientException {
         loadIfNecessary();
         return responseEntity.getBody().getMetadata();

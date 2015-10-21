@@ -1,6 +1,8 @@
 package info.rolandkrueger.userservice.api._internal;
 
 /**
+ * Constants used in the JSON documents delivered by the user micro-service.
+ *
  * @author Roland Krüger
  */
 public final class RestApiConstants {
