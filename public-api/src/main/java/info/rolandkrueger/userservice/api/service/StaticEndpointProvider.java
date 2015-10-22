@@ -13,6 +13,9 @@ public class StaticEndpointProvider implements UserMicroserviceEndpointProvider 
 
     private String endpoint;
 
+    protected StaticEndpointProvider() {
+    }
+
     /**
      * Creates a new StaticEndpointProvider for the given static endpoint URL.
      *

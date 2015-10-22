@@ -1,13 +1,19 @@
 package info.rolandkrueger.userservice.controller;
 
+import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.UserRegistrationsResource;
 import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.Optional;
@@ -19,10 +25,17 @@ import static org.junit.Assert.fail;
 /**
  * @author Roland Krüger
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
+@WebIntegrationTest(randomPort = true)
 public class UserRegistrationRestControllerTest extends AbstractRestControllerTest {
+
+    @Value("${local.server.port}")
+    private int port;
 
     @Before
     public void setUp() {
+        setPort(port);
         deleteAllUsers();
     }
 
