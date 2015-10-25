@@ -25,11 +25,12 @@ public abstract class AbstractRestClient {
      * A pre-configured {@link HttpEntity} object with its media type header set to "application/x-spring-data-verbose+json".
      */
     protected final HttpEntity<String> entityForHALData;
-    private final static HttpHeaders HEADERS_FOR_HAL_DATA;
+    protected final static HttpHeaders HEADERS_FOR_HAL_DATA;
 
     static {
         HEADERS_FOR_HAL_DATA = new HttpHeaders();
         HEADERS_FOR_HAL_DATA.setAccept(MediaType.parseMediaTypes("application/x-spring-data-verbose+json"));
+        HEADERS_FOR_HAL_DATA.setContentType(MediaType.APPLICATION_JSON);
     }
 
     protected AbstractRestClient() {

@@ -17,15 +17,8 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
 
     protected Link self;
     protected Link templatedBaseLink;
-    private final static HttpHeaders HEADERS;
     private ResponseEntity<T> responseEntity;
     private T data;
-
-    static {
-        HEADERS = new HttpHeaders();
-        HEADERS.setAccept(MediaType.parseMediaTypes("application/x-spring-data-verbose+json"));
-        HEADERS.setContentType(MediaType.APPLICATION_JSON);
-    }
 
     protected AbstractResource(Link templatedBaseLink, T data) {
         this(templatedBaseLink);
@@ -83,7 +76,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         return restTemplate.exchange(
                 self.expand().getHref(),
                 HttpMethod.POST,
-                new HttpEntity<>(entity, HEADERS),
+                new HttpEntity<>(entity, HEADERS_FOR_HAL_DATA),
                 getParameterizedTypeReference());
     }
 
