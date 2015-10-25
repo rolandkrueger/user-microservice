@@ -127,7 +127,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
             if (page != null) {
                 put("page", page);
             }
-            if (page != null) {
+            if (size != null) {
                 put("size", size);
             }
             if (sortBy != null) {
