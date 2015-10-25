@@ -17,6 +17,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
+ * A REST collection resource that allows to page through the list of entities.
+ *
  * @author Roland Krüger
  */
 public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R extends AbstractPagedResource> extends AbstractResource<T> {
