@@ -31,7 +31,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
 
     protected abstract R createResourceInstance(Link self);
 
-    protected void setTemplatedBaseLink(Link templatedBaseLink) {
+    protected final void setTemplatedBaseLink(Link templatedBaseLink) {
         this.templatedBaseLink = templatedBaseLink;
     }
 
@@ -47,7 +47,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
         return resource;
     }
 
-    public R goToPage(Integer page, Integer size) {
+    public final R goToPage(Integer page, Integer size) {
         R resource = createResourceInstance(expandLink(templatedBaseLink, page, size, null, null));
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
@@ -58,7 +58,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
         return responseEntity.getBody().getNextLink() != null;
     }
 
-    public R next() throws RestClientException {
+    public final R next() throws RestClientException {
         R resource = createResourceInstance(nextPageLink());
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
@@ -75,7 +75,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
         return responseEntity.getBody().getPreviousLink() != null;
     }
 
-    public R previous() throws RestClientException {
+    public final R previous() throws RestClientException {
         R resource = createResourceInstance(previousPageLink());
         resource.setTemplatedBaseLink(templatedBaseLink);
         return resource;
@@ -149,7 +149,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
      * @throws UnsupportedOperationException
      */
     @Override
-    public T read() {
+    public final T read() {
         throw new UnsupportedOperationException();
     }
 }

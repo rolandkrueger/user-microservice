@@ -51,11 +51,11 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         return data;
     }
 
-    protected Link getProjectionLink(Link targetLink, String projection) {
+    protected final Link getProjectionLink(Link targetLink, String projection) {
         return targetLink.expand(Collections.singletonMap(RestApiConstants.PROJECTION, projection));
     }
 
-    protected ResponseEntity<T> getResponseEntity() throws RestClientException {
+    protected final ResponseEntity<T> getResponseEntity() throws RestClientException {
         loadIfNecessary();
         return responseEntity;
     }
@@ -70,7 +70,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         }
     }
 
-    protected Link getLinkFor(ResponseEntity<? extends AbstractBaseApiData<?>> responseEntity, String rel) {
+    protected final Link getLinkFor(ResponseEntity<? extends AbstractBaseApiData<?>> responseEntity, String rel) {
         Optional<Link> linkOptional = responseEntity.getBody().getLinks()
                 .stream()
                 .filter(link -> link.getRel().equals(rel))
