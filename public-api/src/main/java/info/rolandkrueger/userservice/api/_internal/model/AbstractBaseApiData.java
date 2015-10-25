@@ -20,10 +20,11 @@ public abstract class AbstractBaseApiData<R extends AbstractResource> {
     private Collection<Link> links;
 
     /**
-     * Creates a new resource object for this data type.
+     * Creates a new resource object for this data type. The method uses the self link to create the resource.
      *
      * @param self link to the resource
      * @return a new resource object that represents this data type on the server side
+     * @see #getSelf()
      */
     protected abstract R createNewResource(Link self);
 
