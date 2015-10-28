@@ -4,7 +4,7 @@ import info.rolandkrueger.userservice.model.Authority;
 import info.rolandkrueger.userservice.model.User;
 import info.rolandkrueger.userservice.service.AuthorityService;
 import info.rolandkrueger.userservice.service.UserService;
-import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -12,6 +12,7 @@ import java.util.Arrays;
 /**
  * @author Roland Krüger
  */
+@Transactional
 public abstract class AbstractServiceTest {
 
     public Authority adminAuthority, userAuthority, developerAuthority;
@@ -24,13 +25,6 @@ public abstract class AbstractServiceTest {
     }
 
     protected void createTestData(AuthorityService authorityService, UserService userService) {
-        userService.getUserList(0, 100, Sort.Direction.ASC)
-                .stream()
-                .forEach(user -> userService.delete(user.getId()));
-
-        authorityService.getAuthorityList(0, 100, Sort.Direction.ASC).stream().forEach(
-                existingAuthority -> authorityService.delete(existingAuthority.getId()));
-
         Arrays.asList(adminAuthority, userAuthority, developerAuthority)
                 .stream()
                 .forEach(authorityService::create);
