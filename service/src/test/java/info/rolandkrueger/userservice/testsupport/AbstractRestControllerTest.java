@@ -7,6 +7,7 @@ import info.rolandkrueger.userservice.api.model.UserRegistrationApiData;
 import info.rolandkrueger.userservice.api.resources.AuthoritiesResource;
 import info.rolandkrueger.userservice.api.resources.UserService;
 import info.rolandkrueger.userservice.api.resources.UsersResource;
+import org.junit.After;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -28,6 +29,12 @@ public abstract class AbstractRestControllerTest {
             service = UserServiceAPI.init(CONTEXT_PATH + port);
         }
         return service;
+    }
+
+    @After
+    public void tearDown(){
+        deleteAllUsers();
+        deleteAllAuthorities();
     }
 
     protected static void deleteAllUsers() {

@@ -3,7 +3,6 @@ package info.rolandkrueger.userservice.controller;
 import info.rolandkrueger.userservice.UserMicroserviceApplication;
 import info.rolandkrueger.userservice.api.model.UserApiData;
 import info.rolandkrueger.userservice.testsupport.AbstractRestControllerTest;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -23,11 +22,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringApplicationConfiguration(classes = UserMicroserviceApplication.class)
 @WebIntegrationTest(randomPort = true)
 public class UserLoginRestControllerTest extends AbstractRestControllerTest {
-
-    @Before
-    public void setUp() {
-        deleteAllUsers();
-    }
 
     @Test
     public void testLoginUser() {

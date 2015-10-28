@@ -34,8 +34,6 @@ public class AuthorityRestController_IncorrectUsageTest extends AbstractRestCont
     @Before
     public void setUp() {
         setPort(port);
-        deleteAllUsers();
-        deleteAllAuthorities();
         authoritiesResource = service().authorities();
     }
 

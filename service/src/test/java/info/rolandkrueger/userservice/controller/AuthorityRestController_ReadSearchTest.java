@@ -42,8 +42,6 @@ public class AuthorityRestController_ReadSearchTest extends AbstractRestControll
     @Before
     public void setUp() {
         setPort(port);
-        deleteAllUsers();
-        deleteAllAuthorities();
 
         admins = createAuthority("admins");
         users = createAuthority("users");

@@ -38,8 +38,6 @@ public class AuthorityRestControllerTest extends AbstractRestControllerTest {
     @Before
     public void setUp() {
         setPort(port);
-        deleteAllUsers();
-        deleteAllAuthorities();
         authoritiesResource = service().authorities();
         searchResource = authoritiesResource.search();
     }

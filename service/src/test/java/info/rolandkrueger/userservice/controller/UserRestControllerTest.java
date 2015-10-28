@@ -32,7 +32,6 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
     @Before
     public void setUp() {
         setPort(port);
-        deleteAllUsers();
         alice = registerUser("alice", "passw0rd", "alice@example.com");
     }
 

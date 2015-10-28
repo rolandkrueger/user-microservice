@@ -33,9 +33,6 @@ public class UpdateUserRestControllerTest extends AbstractRestControllerTest {
 
     @Before
     public void setUp() {
-        deleteAllUsers();
-        deleteAllAuthorities();
-
         createAuthority("admin");
         createAuthority("user");
         createAuthority("editor");

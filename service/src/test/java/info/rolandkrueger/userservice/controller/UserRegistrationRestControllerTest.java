@@ -36,7 +36,6 @@ public class UserRegistrationRestControllerTest extends AbstractRestControllerTe
     @Before
     public void setUp() {
         setPort(port);
-        deleteAllUsers();
     }
 
     @Test
