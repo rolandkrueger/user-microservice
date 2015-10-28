@@ -22,7 +22,7 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
      * @see Link#isTemplated()
      */
     protected Link self;
-    protected Link templatedBaseLink;
+    protected Link templatedSelfLink;
     private ResponseEntity<T> responseEntity;
     private T data;
 
@@ -55,15 +55,15 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
      * link via which this resource was originally accessed. I.e., this non-templated link is typically generated when
      * traversing the (parameterized) linked resources of the service.
      *
-     * @param templatedBaseLink link to this resource which may be templated.
+     * @param templatedSelfLink link to this resource which may be templated.
      * @param self              link to this resource. It is expected that this link is not templated.
      * @see Link#isTemplated()
      */
-    public AbstractResource(Link templatedBaseLink, Link self) {
+    public AbstractResource(Link templatedSelfLink, Link self) {
         Preconditions.checkNotNull(self);
-        Preconditions.checkNotNull(templatedBaseLink);
+        Preconditions.checkNotNull(templatedSelfLink);
         this.self = self;
-        this.templatedBaseLink = templatedBaseLink;
+        this.templatedSelfLink = templatedSelfLink;
     }
 
     protected abstract ParameterizedTypeReference<T> getParameterizedTypeReference();

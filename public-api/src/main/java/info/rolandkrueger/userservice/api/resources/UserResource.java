@@ -25,7 +25,7 @@ public class UserResource extends AbstractResource<UserApiData> implements CanDe
     }
 
     public final UserResource useProjection(UserProjections projection) {
-        return new UserResource(getProjectionLink(templatedBaseLink, projection.getName()), getApiData());
+        return new UserResource(getProjectionLink(templatedSelfLink, projection.getName()), getApiData());
     }
 
     @Override

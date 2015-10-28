@@ -34,31 +34,31 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
     /**
      * {@inheritDoc}
      */
-    protected AbstractPagedResource(Link templatedBaseLink, Link self) {
-        super(templatedBaseLink, self);
+    protected AbstractPagedResource(Link templatedSelfLink, Link self) {
+        super(templatedSelfLink, self);
     }
 
     protected abstract R createResourceInstance(Link self);
 
-    protected final void setTemplatedBaseLink(Link templatedBaseLink) {
-        this.templatedBaseLink = templatedBaseLink;
+    protected final void setTemplatedSelfLink(Link templatedSelfLink) {
+        this.templatedSelfLink = templatedSelfLink;
     }
 
     public final R goToPageSorted(Integer page, Integer size, String sortBy, SortDirection direction) {
-        R resource = createResourceInstance(expandLink(templatedBaseLink, page, size, sortBy, direction));
-        resource.setTemplatedBaseLink(templatedBaseLink);
+        R resource = createResourceInstance(expandLink(templatedSelfLink, page, size, sortBy, direction));
+        resource.setTemplatedSelfLink(templatedSelfLink);
         return resource;
     }
 
     public final R sort(String sortBy, SortDirection direction) {
-        R resource = createResourceInstance(expandLink(templatedBaseLink, null, null, sortBy, direction));
-        resource.setTemplatedBaseLink(templatedBaseLink);
+        R resource = createResourceInstance(expandLink(templatedSelfLink, null, null, sortBy, direction));
+        resource.setTemplatedSelfLink(templatedSelfLink);
         return resource;
     }
 
     public final R goToPage(Integer page, Integer size) {
-        R resource = createResourceInstance(expandLink(templatedBaseLink, page, size, null, null));
-        resource.setTemplatedBaseLink(templatedBaseLink);
+        R resource = createResourceInstance(expandLink(templatedSelfLink, page, size, null, null));
+        resource.setTemplatedSelfLink(templatedSelfLink);
         return resource;
     }
 
@@ -69,7 +69,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
 
     public final R next() throws RestClientException {
         R resource = createResourceInstance(nextPageLink());
-        resource.setTemplatedBaseLink(templatedBaseLink);
+        resource.setTemplatedSelfLink(templatedSelfLink);
         return resource;
     }
 
@@ -93,7 +93,7 @@ public abstract class AbstractPagedResource<T extends AbstractBaseApiData<?>, R 
 
     public final R previous() throws RestClientException {
         R resource = createResourceInstance(previousPageLink());
-        resource.setTemplatedBaseLink(templatedBaseLink);
+        resource.setTemplatedSelfLink(templatedSelfLink);
         return resource;
     }
 
