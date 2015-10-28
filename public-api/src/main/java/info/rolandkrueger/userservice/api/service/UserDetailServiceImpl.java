@@ -26,6 +26,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     private UserMicroserviceEndpointProvider endpointProvider;
 
+    /**
+     * Constructor which is autowired with an instance of {@link UserMicroserviceEndpointProvider}.
+     */
     @Autowired
     public UserDetailServiceImpl(UserMicroserviceEndpointProvider endpointProvider) {
         Preconditions.checkNotNull(endpointProvider);

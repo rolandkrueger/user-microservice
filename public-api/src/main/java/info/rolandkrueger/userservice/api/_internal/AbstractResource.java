@@ -11,19 +11,40 @@ import java.util.Collections;
 import java.util.Optional;
 
 /**
+ * Client-side representation of a REST resource. This class will be used to deserialize the JSON+HAL server responses
+ * returned for calls to the RESTful API. A resource contains the actual domain data as its payload and, in addition,
+ * contextual links to related resources. Such a resource link for any given relationship type can be obtained with
+ * {@link #getLinkFor(ResponseEntity, String)}. Based on these links new {@link AbstractResource} instances can be
+ * created.
+ *
  * @author Roland Krüger
  */
 public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends AbstractRestClient {
 
     /**
-     * Link to self: this is the target URL for this resource. GETting this link will fetch this resource's data. This
-     * link is not templated.
+     * Link to self: this is the target URL for this resource. GETting this link will fetch this resource's data including
+     * all references to other resources which are available in the current context. This link is not templated.
      *
      * @see Link#isTemplated()
      */
     protected Link self;
+
+    /**
+     * Templated link to self: this is the templated target URL for this resource. A templated link can contain additional
+     * parameters that first need to be specified and resolved to obtain a non-templated link which can then be used
+     * to GET the resource's data.
+     */
     protected Link templatedSelfLink;
+
+    /**
+     * Response entity that is available as soon as a service call has been performed on the server.
+     */
     private ResponseEntity<T> responseEntity;
+
+    /**
+     * The resource data that was fetched from the service. This is the actual domain data payload which is provided
+     * by the service along with contextual resource links.
+     */
     private T data;
 
     /**
@@ -66,10 +87,17 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
         this.templatedSelfLink = templatedSelfLink;
     }
 
+    /**
+     * Returns an object of class {@link ParameterizedTypeReference} which is needed by the
+     * {@link org.springframework.web.client.RestTemplate} in order to interpret the JSON+HAL response from the service.
+     * <p/>
+     * This method is typically implemented by sub-classes by creating and returning a new empty object of class
+     * {@link ParameterizedTypeReference}
+     */
     protected abstract ParameterizedTypeReference<T> getParameterizedTypeReference();
 
     /**
-     * Returns the {@link Class} of the resource type <code>T</code>.
+     * Returns the {@link Class} object of the resource type <code>T</code>.
      */
     protected abstract Class<T> getResourceType();
 
@@ -127,7 +155,8 @@ public abstract class AbstractResource<T extends AbstractBaseApiData<?>> extends
 
     /**
      * Retrieves a link for any given relationship (<code>rel</code>) from the specified response entity. If the
-     * specified relationship is not defined in the response entity's link section, <code>null</code> is returned.
+     * specified relationship is not defined in the response entity's link section, <code>null</code> is returned by
+     * this method.
      *
      * @param responseEntity the response entity from which the link should be retrieved
      * @param rel            the requested relationship
