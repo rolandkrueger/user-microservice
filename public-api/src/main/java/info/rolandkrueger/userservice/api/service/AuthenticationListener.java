@@ -15,7 +15,7 @@ import java.util.Optional;
 
 /**
  * Implementation of a Spring {@link ApplicationListener} that listens to {@link InteractiveAuthenticationSuccessEvent}s
- * in order to mark affected the user as logged in in the service. When a user has successfully signed in with the service
+ * in order to mark the affected user as logged in in the service. When a user has successfully signed in with the service
  * the service has to be notified of this event. The service will then update the date for the user's last login accordingly
  * and mark the user as logged in.
  *

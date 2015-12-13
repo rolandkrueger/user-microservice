@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
 /**
+ * Paged resource for {@link AuthorityApiData} objects.
+ *
  * @author Roland Krüger
  */
 public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData, AuthoritiesResource> implements
@@ -30,6 +32,11 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         return goToPageSorted(page, size, getSortByProperty(sortBy), direction);
     }
 
+    /**
+     * Navigates to the search resource for authority objects.
+     *
+     * @return the authority search resource
+     */
     public final AuthoritiesSearchResource search() {
         return new AuthoritiesSearchResource(getLinkFor(getResponseEntity(), RestApiConstants.SEARCH_RESOURCE));
     }
@@ -71,6 +78,12 @@ public class AuthoritiesResource extends AbstractPagedResource<AuthorityApiData,
         updateInternal(entity);
     }
 
+    /**
+     * Null-safe helper method that reads the sort property from the given {@link AuthoritiesSort} enum.
+     *
+     * @param sortBy the sort property enum for authorities
+     * @return the property to sort by or <code>null</code> if the given parameter is <code>null</code>
+     */
     private String getSortByProperty(AuthoritiesSort sortBy) {
         return sortBy == null ? null : sortBy.getProperty();
     }

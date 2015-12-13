@@ -9,6 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import java.time.LocalDateTime;
 
 /**
+ * Client-side representation of the <code>Authority</code> domain object. Implements Spring Security's
+ * {@link GrantedAuthority} interface and can thus be used in a {@link org.springframework.security.core.userdetails.UserDetailsService}.
+ *
  * @author Roland Krüger
  */
 public class AuthorityApiData extends AbstractBaseApiData<AuthorityResource> implements GrantedAuthority {
@@ -20,6 +23,12 @@ public class AuthorityApiData extends AbstractBaseApiData<AuthorityResource> imp
     public AuthorityApiData() {
     }
 
+    /**
+     * Create a new {@link AuthorityApiData} object with the given authority name and description.
+     *
+     * @param authority   name of the authority
+     * @param description description of the authority
+     */
     public AuthorityApiData(String authority, String description) {
         setAuthority(authority);
         setDescription(description);

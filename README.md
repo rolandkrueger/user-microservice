@@ -78,3 +78,7 @@ String alicePasswordHash = service()
     .read()
     .getPassword();
 ```
+
+# Open issues
+
+* Support for Remember-Me

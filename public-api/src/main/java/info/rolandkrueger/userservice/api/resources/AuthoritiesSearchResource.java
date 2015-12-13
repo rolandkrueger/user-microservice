@@ -11,6 +11,8 @@ import org.springframework.hateoas.PagedResources;
 import java.util.Optional;
 
 /**
+ * Authority search resource. Provides methods to search for authority objects.
+ *
  * @author Roland Krüger
  */
 public class AuthoritiesSearchResource extends AbstractResource<EmptyApiData> {
@@ -30,10 +32,23 @@ public class AuthoritiesSearchResource extends AbstractResource<EmptyApiData> {
         return EmptyApiData.class;
     }
 
+    /**
+     * Searches for a given authority name. If no such object exists an empty result is returned.
+     *
+     * @param authority authority name to search for
+     * @return a resource object that contains the search result
+     */
     public AuthoritiesSearchResultResource findByAuthority(String authority) {
         return new AuthoritiesSearchResultResource(getFindByAuthorityLink().expand(authority));
     }
 
+    /**
+     * Searches for a given authority name and returns an {@link Optional} containing the requested authority object
+     * if available.
+     *
+     * @param authority authority name to search for
+     * @return Optional containing the requested authority object if that could be found
+     */
     public Optional<AuthorityApiData> findOneByAuthority(String authority) {
         return findByAuthority(authority).getData().stream().findFirst();
     }

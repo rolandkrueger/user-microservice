@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
+ * Client-side representation of the <code>User</code> domain object. Implements Spring Security's
+ * {@link UserDetails} interface and can thus be used in a {@link org.springframework.security.core.userdetails.UserDetailsService}.
+ *
  * @author Roland Krüger
  */
 public class UserApiData extends AbstractBaseApiData<UserResource> implements UserDetails {

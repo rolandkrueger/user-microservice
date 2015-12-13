@@ -6,6 +6,10 @@ import info.rolandkrueger.userservice.api.resources.UserRegistrationsResource;
 import org.springframework.hateoas.Link;
 
 /**
+ * Client-side representation of a pending (non-confirmed) user registration. Such a user registration object can be
+ * obtained from the service for any given registration confirmation token if that token is still valid. For tokens
+ * that have timed out no user registration object will be provided.
+ *
  * @author Roland Krüger
  */
 public class UserRegistrationApiData extends AbstractBaseApiData<UserRegistrationsResource> {
